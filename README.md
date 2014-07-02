@@ -1,4 +1,4 @@
 Parse
 =====
 
-Appcelerator Titanium module for the Parse SDK
+Appcelerator Titanium module for the Parse SDK. 
