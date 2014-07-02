@@ -14,7 +14,7 @@ Simply add the following lines to your `tiapp.xml` file:
 
 ```xml
     <modules>
-        <module platform="android">nl.rebelic.hockeyapp</module>
+        <module platform="android">eu.rebelcorp.parse</module>
     </modules>
 ```
 
@@ -23,7 +23,7 @@ Simply add the following lines to your `tiapp.xml` file:
 Put the following code in your app.js (or alloy.js if you are using Alloy) to enable the module.
 
 ```javascript
-	var Parse = require('eu.hockeyapp.parse');
+	var Parse = require('eu.rebelcorp.parse');
 	Parse.start('<PARSE-APPLICATION-ID>', '<PARSE-CLIENT-ID>');
 ```
 
