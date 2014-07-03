@@ -6,17 +6,10 @@ Appcelerator Titanium module for the Parse SDK. This module currently only suppo
 
 ## Usage
 
-Add the module to you project, the latest version of the module can be found inside the dist folder.
+### Get it [![gitTio](http://gitt.io/badge.png)](http://gitt.io/component/eu.rebelcorp.parse)
+Download the latest distribution ZIP-file and consult the [Titanium Documentation](http://docs.appcelerator.com/titanium/latest/#!/guide/Using_a_Module) on how install it, or simply use the [gitTio CLI](http://gitt.io/cli):
 
-### Referencing the module in your Titanium Mobile application ###
-
-Simply add the following lines to your `tiapp.xml` file:
-
-```xml
-    <modules>
-        <module platform="android">eu.rebelcorp.parse</module>
-    </modules>
-```
+`$ gittio install eu.rebelcorp.parse`
 
 ### Example
 
@@ -55,8 +48,7 @@ Subscribe of unsubscribe to Parse Channels
 ## Author
 
 **Timan Rebel**  
-http://timanrebel.nl
-Twitter: @timanrebel  
+twitter: @timanrebel  
 
 
 ## License
