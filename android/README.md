@@ -7,17 +7,24 @@ Appcelerator Titanium module for the Parse SDK. This module currently only suppo
 ## Usage
 
 ### Get it [![gitTio](http://gitt.io/badge.png)](http://gitt.io/component/eu.rebelcorp.parse)
-Download the latest distribution ZIP-file and consult the [Titanium Documentation](http://docs.appcelerator.com/titanium/latest/#!/guide/Using_a_Module) on how install it, or simply use the [gitTio CLI](http://gitt.io/cli):
+Download the latest [distribution ZIP-file](https://github.com/timanrebel/Parse/releases) and consult the [Titanium Documentation](http://docs.appcelerator.com/titanium/latest/#!/guide/Using_a_Module) on how install it, or simply use the [gitTio CLI](http://gitt.io/cli):
 
 `$ gittio install eu.rebelcorp.parse`
 
 ### Example
 
-Put the following code in your app.js (or alloy.js if you are using Alloy) to enable the module.
+Because the module needs to load and initialize during the startup of your Application to properly support Push Notifications,
+we need to put the application id and client key from Parse in your **tiapp.xml** file:
+
+```xml
+	<property name="Parse_AppId" type="string">abcdefg</property>
+    <property name="Parse_ClientKey" type="string">hijklmnop</property>
+```
+
+Put the following code in your app.js (or alloy.js if you are using Alloy) to access the module in Javascript.
 
 ```javascript
 	var Parse = require('eu.rebelcorp.parse');
-	Parse.start('<PARSE-APPLICATION-ID>', '<PARSE-CLIENT-ID>');
 ```
 
 To enable Android Push Notifications
@@ -26,7 +33,7 @@ To enable Android Push Notifications
     Parse.enablePush();
 ```
 
-Subscribe of unsubscribe to Parse Channels
+Subscribe or unsubscribe to Parse Channels
 
 ```javascript
     Parse.subscribeChannel('user_123');
@@ -40,9 +47,12 @@ Subscribe of unsubscribe to Parse Channels
 * Incoming Push Notifications are not exposed when clicked upon
 
 
-## Changes
+## Changelog
 
-**0.1**
+**[v0.2](https://github.com/timanrebel/Parse/releases/tag/0.2)**
+- Moved the app id and client key to tiapp.xml and moved initialization of the module during startup of your Application. To fix [#1](https://github.com/timanrebel/Parse/issues/1)
+
+**[v0.1](https://github.com/timanrebel/Parse/releases/tag/0.1)**
 - Initial release supporting Android push notifications
 
 ## Author

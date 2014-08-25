@@ -19,6 +19,7 @@ import android.content.Context;
 import com.parse.Parse;
 import com.parse.PushService;
 import com.parse.ParseAnalytics;
+import com.parse.ParseInstallation;
 
 @Kroll.module(name="Parse", id="eu.rebelcorp.parse")
 public class ParseModule extends KrollModule
@@ -26,6 +27,10 @@ public class ParseModule extends KrollModule
 
 	// Standard Debugging variables
 	private static final String TAG = "ParseModule";
+    
+    // tiapp.xml properties containing Parse's app id and client key
+    public static String PROPERTY_APP_ID = "Parse_AppId";
+    public static String PROPERTY_CLIENT_KEY = "Parse_ClientKey";
 
 	// You can define constants with @Kroll.constant, for example:
 	// @Kroll.constant public static final String EXTERNAL_NAME = value;
@@ -38,13 +43,19 @@ public class ParseModule extends KrollModule
 	@Kroll.onAppCreate
 	public static void onAppCreate(TiApplication app)
 	{
-			}
+        String appId = TiApplication.getInstance().getAppProperties().getString(ParseModule.PROPERTY_APP_ID, "");
+        String clientKey = TiApplication.getInstance().getAppProperties().getString(ParseModule.PROPERTY_CLIENT_KEY, "");
+        
+        Log.d(TAG, "Initializing with: " + appId + ", " + clientKey + ";");
+        
+        Parse.initialize(TiApplication.getInstance(), appId, clientKey);
+    }
 
 	// Methods
 	@Kroll.method
 	public void start(@Kroll.argument String id, @Kroll.argument String client)
 	{
-		Parse.initialize(TiApplication.getInstance(), id, client);
+//		Parse.initialize(TiApplication.getInstance(), id, client);
 	}
 
     @Kroll.method
