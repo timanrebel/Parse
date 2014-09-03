@@ -12,7 +12,7 @@ copyright: Copyright (c) 2014 by Rebelcorp
 
 # these should not be edited
 name: Parse
-moduleid: eu.rebelcorp.parse
+moduleid: rebel.parse
 guid: 39f0181f-c7e5-4665-a87f-4a06e4f41f9f
 platform: android
 minsdk: 3.2.3.GA
