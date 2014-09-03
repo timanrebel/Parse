@@ -1,0 +1,524 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		24416B8111C4CA220047AFDD /* Build & Test */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 24416B8A11C4CA520047AFDD /* Build configuration list for PBXAggregateTarget "Build & Test" */;
+			buildPhases = (
+				24416B8011C4CA220047AFDD /* ShellScript */,
+			);
+			dependencies = (
+				24416B8511C4CA280047AFDD /* PBXTargetDependency */,
+			);
+			name = "Build & Test";
+			productName = "Build & test";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		24DD6CF91134B3F500162E58 /* RebelParseModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* RebelParseModule.h */; };
+		24DD6CFA1134B3F500162E58 /* RebelParseModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* RebelParseModule.m */; };
+		24DE9E1111C5FE74003F90F6 /* RebelParseModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* RebelParseModuleAssets.h */; };
+		24DE9E1211C5FE74003F90F6 /* RebelParseModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* RebelParseModuleAssets.m */; };
+		AA747D9F0F9514B9006C5449 /* RebelParse_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* RebelParse_Prefix.pch */; };
+		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		BCB03F7919B78B8000DED4EA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCB03F7819B78B8000DED4EA /* FacebookSDK.framework */; };
+		BCB03F7D19B78BD600DED4EA /* JRSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB03F7B19B78BD600DED4EA /* JRSwizzle.h */; };
+		BCB03F7E19B78BD600DED4EA /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB03F7C19B78BD600DED4EA /* JRSwizzle.m */; };
+		BCE1EBCF19B5C00100ECF758 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBCE19B5C00100ECF758 /* AudioToolbox.framework */; };
+		BCE1EBD119B5C00700ECF758 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBD019B5C00700ECF758 /* CFNetwork.framework */; };
+		BCE1EBD319B5C00D00ECF758 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBD219B5C00D00ECF758 /* CoreGraphics.framework */; };
+		BCE1EBD519B5C01200ECF758 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBD419B5C01200ECF758 /* CoreLocation.framework */; };
+		BCE1EBD719B5C01A00ECF758 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBD619B5C01A00ECF758 /* libz.dylib */; };
+		BCE1EBD919B5C02000ECF758 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBD819B5C02000ECF758 /* MobileCoreServices.framework */; };
+		BCE1EBDB19B5C02500ECF758 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBDA19B5C02500ECF758 /* QuartzCore.framework */; };
+		BCE1EBDD19B5C02B00ECF758 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBDC19B5C02B00ECF758 /* Security.framework */; };
+		BCE1EBDF19B5C02F00ECF758 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBDE19B5C02F00ECF758 /* StoreKit.framework */; };
+		BCE1EBE119B5C03400ECF758 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBE019B5C03400ECF758 /* SystemConfiguration.framework */; };
+		BCE1EBE519B5C05000ECF758 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBE219B5C05000ECF758 /* Bolts.framework */; };
+		BCE1EBE719B5C05000ECF758 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBE419B5C05000ECF758 /* ParseFacebookUtils.framework */; };
+		BCE1EBF119B5D47D00ECF758 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBF019B5D47D00ECF758 /* Parse.framework */; };
+		BCE1EBF819B5E72D00ECF758 /* RebelParseObjectProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = BCE1EBF619B5E72D00ECF758 /* RebelParseObjectProxy.h */; };
+		BCE1EBF919B5E72D00ECF758 /* RebelParseObjectProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE1EBF719B5E72D00ECF758 /* RebelParseObjectProxy.m */; };
+		BCE1EBFE19B61A2000ECF758 /* RebelParseQueryProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = BCE1EBFC19B61A2000ECF758 /* RebelParseQueryProxy.h */; };
+		BCE1EBFF19B61A2000ECF758 /* RebelParseQueryProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE1EBFD19B61A2000ECF758 /* RebelParseQueryProxy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		24416B8411C4CA280047AFDD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = Parse;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		24DD6CF71134B3F500162E58 /* RebelParseModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RebelParseModule.h; path = Classes/RebelParseModule.h; sourceTree = "<group>"; };
+		24DD6CF81134B3F500162E58 /* RebelParseModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RebelParseModule.m; path = Classes/RebelParseModule.m; sourceTree = "<group>"; };
+		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
+		24DE9E0F11C5FE74003F90F6 /* RebelParseModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RebelParseModuleAssets.h; path = Classes/RebelParseModuleAssets.h; sourceTree = "<group>"; };
+		24DE9E1011C5FE74003F90F6 /* RebelParseModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RebelParseModuleAssets.m; path = Classes/RebelParseModuleAssets.m; sourceTree = "<group>"; };
+		AA747D9E0F9514B9006C5449 /* RebelParse_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RebelParse_Prefix.pch; sourceTree = SOURCE_ROOT; };
+		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BCB03F7819B78B8000DED4EA /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = assets/Frameworks/FacebookSDK.framework; sourceTree = "<group>"; };
+		BCB03F7B19B78BD600DED4EA /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
+		BCB03F7C19B78BD600DED4EA /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
+		BCE1EBCE19B5C00100ECF758 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		BCE1EBD019B5C00700ECF758 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		BCE1EBD219B5C00D00ECF758 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BCE1EBD419B5C01200ECF758 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		BCE1EBD619B5C01A00ECF758 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		BCE1EBD819B5C02000ECF758 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		BCE1EBDA19B5C02500ECF758 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		BCE1EBDC19B5C02B00ECF758 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		BCE1EBDE19B5C02F00ECF758 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		BCE1EBE019B5C03400ECF758 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		BCE1EBE219B5C05000ECF758 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = assets/Frameworks/Bolts.framework; sourceTree = "<group>"; };
+		BCE1EBE419B5C05000ECF758 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = assets/Frameworks/ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		BCE1EBF019B5D47D00ECF758 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = assets/Frameworks/Parse.framework; sourceTree = "<group>"; };
+		BCE1EBF619B5E72D00ECF758 /* RebelParseObjectProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RebelParseObjectProxy.h; path = Classes/RebelParseObjectProxy.h; sourceTree = "<group>"; };
+		BCE1EBF719B5E72D00ECF758 /* RebelParseObjectProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RebelParseObjectProxy.m; path = Classes/RebelParseObjectProxy.m; sourceTree = "<group>"; };
+		BCE1EBFC19B61A2000ECF758 /* RebelParseQueryProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RebelParseQueryProxy.h; path = Classes/RebelParseQueryProxy.h; sourceTree = "<group>"; };
+		BCE1EBFD19B61A2000ECF758 /* RebelParseQueryProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RebelParseQueryProxy.m; path = Classes/RebelParseQueryProxy.m; sourceTree = "<group>"; };
+		D2AAC07E0554694100DB518D /* libRebelParse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRebelParse.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D2AAC07C0554694100DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCE1EBE719B5C05000ECF758 /* ParseFacebookUtils.framework in Frameworks */,
+				BCE1EBE119B5C03400ECF758 /* SystemConfiguration.framework in Frameworks */,
+				BCE1EBDF19B5C02F00ECF758 /* StoreKit.framework in Frameworks */,
+				BCE1EBDD19B5C02B00ECF758 /* Security.framework in Frameworks */,
+				BCE1EBE519B5C05000ECF758 /* Bolts.framework in Frameworks */,
+				BCE1EBDB19B5C02500ECF758 /* QuartzCore.framework in Frameworks */,
+				BCE1EBD919B5C02000ECF758 /* MobileCoreServices.framework in Frameworks */,
+				BCE1EBD719B5C01A00ECF758 /* libz.dylib in Frameworks */,
+				BCE1EBD519B5C01200ECF758 /* CoreLocation.framework in Frameworks */,
+				BCE1EBD319B5C00D00ECF758 /* CoreGraphics.framework in Frameworks */,
+				BCE1EBF119B5D47D00ECF758 /* Parse.framework in Frameworks */,
+				BCB03F7919B78B8000DED4EA /* FacebookSDK.framework in Frameworks */,
+				BCE1EBD119B5C00700ECF758 /* CFNetwork.framework in Frameworks */,
+				BCE1EBCF19B5C00100ECF758 /* AudioToolbox.framework in Frameworks */,
+				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC07E0554694100DB518D /* libRebelParse.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				BCB03F7A19B78BD600DED4EA /* JRSwizzle */,
+				08FB77AEFE84172EC02AAC07 /* Classes */,
+				32C88DFF0371C24200C91783 /* Other Sources */,
+				0867D69AFE84028FC02AAC07 /* Frameworks */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = Parse;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BCB03F7819B78B8000DED4EA /* FacebookSDK.framework */,
+				BCE1EBF019B5D47D00ECF758 /* Parse.framework */,
+				BCE1EBE219B5C05000ECF758 /* Bolts.framework */,
+				BCE1EBE419B5C05000ECF758 /* ParseFacebookUtils.framework */,
+				BCE1EBE019B5C03400ECF758 /* SystemConfiguration.framework */,
+				BCE1EBDE19B5C02F00ECF758 /* StoreKit.framework */,
+				BCE1EBDC19B5C02B00ECF758 /* Security.framework */,
+				BCE1EBDA19B5C02500ECF758 /* QuartzCore.framework */,
+				BCE1EBD819B5C02000ECF758 /* MobileCoreServices.framework */,
+				BCE1EBD619B5C01A00ECF758 /* libz.dylib */,
+				BCE1EBD419B5C01200ECF758 /* CoreLocation.framework */,
+				BCE1EBD219B5C00D00ECF758 /* CoreGraphics.framework */,
+				BCE1EBD019B5C00700ECF758 /* CFNetwork.framework */,
+				BCE1EBCE19B5C00100ECF758 /* AudioToolbox.framework */,
+				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		08FB77AEFE84172EC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				BCE1EBFB19B619FC00ECF758 /* Query */,
+				BCE1EBFA19B619ED00ECF758 /* Object */,
+				24DE9E0F11C5FE74003F90F6 /* RebelParseModuleAssets.h */,
+				24DE9E1011C5FE74003F90F6 /* RebelParseModuleAssets.m */,
+				24DD6CF71134B3F500162E58 /* RebelParseModule.h */,
+				24DD6CF81134B3F500162E58 /* RebelParseModule.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		32C88DFF0371C24200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				AA747D9E0F9514B9006C5449 /* RebelParse_Prefix.pch */,
+				24DD6D1B1134B66800162E58 /* titanium.xcconfig */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		BCB03F7A19B78BD600DED4EA /* JRSwizzle */ = {
+			isa = PBXGroup;
+			children = (
+				BCB03F7B19B78BD600DED4EA /* JRSwizzle.h */,
+				BCB03F7C19B78BD600DED4EA /* JRSwizzle.m */,
+			);
+			name = JRSwizzle;
+			path = Vendor/JRSwizzle;
+			sourceTree = "<group>";
+		};
+		BCE1EBFA19B619ED00ECF758 /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				BCE1EBF619B5E72D00ECF758 /* RebelParseObjectProxy.h */,
+				BCE1EBF719B5E72D00ECF758 /* RebelParseObjectProxy.m */,
+			);
+			name = Object;
+			sourceTree = "<group>";
+		};
+		BCE1EBFB19B619FC00ECF758 /* Query */ = {
+			isa = PBXGroup;
+			children = (
+				BCE1EBFC19B61A2000ECF758 /* RebelParseQueryProxy.h */,
+				BCE1EBFD19B61A2000ECF758 /* RebelParseQueryProxy.m */,
+			);
+			name = Query;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC07A0554694100DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCE1EBFE19B61A2000ECF758 /* RebelParseQueryProxy.h in Headers */,
+				BCB03F7D19B78BD600DED4EA /* JRSwizzle.h in Headers */,
+				AA747D9F0F9514B9006C5449 /* RebelParse_Prefix.pch in Headers */,
+				24DD6CF91134B3F500162E58 /* RebelParseModule.h in Headers */,
+				24DE9E1111C5FE74003F90F6 /* RebelParseModuleAssets.h in Headers */,
+				BCE1EBF819B5E72D00ECF758 /* RebelParseObjectProxy.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC07D0554694100DB518D /* Parse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "Parse" */;
+			buildPhases = (
+				D2AAC07A0554694100DB518D /* Headers */,
+				D2AAC07B0554694100DB518D /* Sources */,
+				D2AAC07C0554694100DB518D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Parse;
+			productName = Parse;
+			productReference = D2AAC07E0554694100DB518D /* libRebelParse.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "Parse" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* Parse */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC07D0554694100DB518D /* Parse */,
+				24416B8111C4CA220047AFDD /* Build & Test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		24416B8011C4CA220047AFDD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here\n\npython \"${TITANIUM_SDK}/titanium.py\" run --dir=\"${PROJECT_DIR}\"\nexit $?\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC07B0554694100DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24DD6CFA1134B3F500162E58 /* RebelParseModule.m in Sources */,
+				BCE1EBF919B5E72D00ECF758 /* RebelParseObjectProxy.m in Sources */,
+				BCE1EBFF19B61A2000ECF758 /* RebelParseQueryProxy.m in Sources */,
+				24DE9E1211C5FE74003F90F6 /* RebelParseModuleAssets.m in Sources */,
+				BCB03F7E19B78BD600DED4EA /* JRSwizzle.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		24416B8511C4CA280047AFDD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC07D0554694100DB518D /* Parse */;
+			targetProxy = 24416B8411C4CA280047AFDD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB921F08733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DSTROOT = /tmp/RebelParse.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/assets/Frameworks",
+					"$(PROJECT_DIR)/assets",
+				);
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = RebelParse_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = (
+					"-DDEBUG",
+					"-DTI_POST_1_2",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = RebelParse;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		1DEB922008733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = /tmp/RebelParse.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/assets/Frameworks",
+					"$(PROJECT_DIR)/assets",
+				);
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = RebelParse_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "-DTI_POST_1_2";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = RebelParse;
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Release;
+		};
+		1DEB922308733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DSTROOT = /tmp/RebelParse.dst;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = RebelParse_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_CFLAGS = (
+					"-DDEBUG",
+					"-DTI_POST_1_2",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = RebelParse;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		1DEB922408733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LIBRARY = "libstdc++";
+				DSTROOT = /tmp/RebelParse.dst;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = RebelParse_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_SHADOW = NO;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DTI_POST_1_2";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = RebelParse;
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Release;
+		};
+		24416B8211C4CA220047AFDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "Build & test";
+			};
+			name = Debug;
+		};
+		24416B8311C4CA220047AFDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = "Build & test";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "Parse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB921F08733DC00010E9CD /* Debug */,
+				1DEB922008733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "Parse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB922308733DC00010E9CD /* Debug */,
+				1DEB922408733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24416B8A11C4CA520047AFDD /* Build configuration list for PBXAggregateTarget "Build & Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24416B8211C4CA220047AFDD /* Debug */,
+				24416B8311C4CA220047AFDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}
