@@ -36,8 +36,8 @@ To enable Android Push Notifications
 To handle received notifications
 
 ```javascript
-    Parse.addEventListener('onPushMessageReceived', function(e) {
-        Ti.API.log("Ti.onPushMessageReceived", JSON.stringify(e));
+    Parse.addEventListener('notification', function(e) {
+        Ti.API.log("notification: ", JSON.stringify(e));
 ```
 
 Subscribe or unsubscribe to Parse Channels
@@ -55,6 +55,8 @@ Subscribe or unsubscribe to Parse Channels
 
 
 ## Changelog
+**[v0.3](https://github.com/timanrebel/Parse/releases/tag/0.3)**
+- Fire `notification` event when new notification is received.
 
 **[v0.2](https://github.com/timanrebel/Parse/releases/tag/0.2)**
 - Moved the app id and client key to tiapp.xml and moved initialization of the module during startup of your Application. To fix [#1](https://github.com/timanrebel/Parse/issues/1)
