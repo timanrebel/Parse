@@ -1,0 +1,4 @@
+titanium.platform=/Users/<username>/Library/Application Support/Titanium/mobilesdk/osx/3.2.0.GA/android
+android.platform=/Users/<username>/AndroidSDK/sdk/platforms/android-19
+google.apis=/Users/<username>/AndroidSDK/sdk/add-ons/addon-google_apis-google-19
+android.ndk=/Users/<username>/AndroidSDK/ndk/

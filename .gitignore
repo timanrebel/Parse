@@ -1,4 +1,4 @@
-# Build folder and log file
 build/
 build.log
 .DS_Store
+android/build.properties
