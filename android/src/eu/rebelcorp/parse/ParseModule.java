@@ -49,25 +49,23 @@ public class ParseModule extends KrollModule
         Log.d(TAG, "Initializing with: " + appId + ", " + clientKey + ";");
         
         Parse.initialize(TiApplication.getInstance(), appId, clientKey);
+        
+        // Track Push opens
+        ParseAnalytics.trackAppOpened(TiApplication.getAppRootOrCurrentActivity().getIntent());
+        Context context = TiApplication.getInstance().getApplicationContext();
+        PushService.setDefaultPushCallback(context, TiApplication.getAppRootOrCurrentActivity().getClass());
     }
 
 	// Methods
 	@Kroll.method
 	public void start(@Kroll.argument String id, @Kroll.argument String client)
 	{
-//		Parse.initialize(TiApplication.getInstance(), id, client);
 	}
 
     @Kroll.method
     public void enablePush() {
-        Context context = TiApplication.getInstance().getApplicationContext();
-
 		// Register Push
-        PushService.setDefaultPushCallback(context, TiApplication.getAppRootOrCurrentActivity().getClass());
 		ParseInstallation.getCurrentInstallation().saveInBackground();
-
-		// Track Push opens
-		ParseAnalytics.trackAppOpened(TiApplication.getAppRootOrCurrentActivity().getIntent());
     }
 
 	@Kroll.method
