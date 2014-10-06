@@ -45,8 +45,8 @@ public class ParseModuleBroadcastReceiver extends BroadcastReceiver {
 					JSONObject json = new JSONObject(data);
 					KrollDict dict = new KrollDict(json);
 	        
-	        Log.d(TAG, "in onPushMessageReceived.");
-					ParseModule.getInstance().fireEvent("onPushMessageReceived", dict);
+	        Log.d(TAG, "in notification.");
+					ParseModule.getInstance().fireEvent("notification", dict);
 
 				}
 			}

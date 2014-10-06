@@ -31,9 +31,9 @@ public class ParseModule extends KrollModule
 	// Standard Debugging variables
 	private static final String TAG = "ParseModule";
   
-  // tiapp.xml properties containing Parse's app id and client key
-  public static String PROPERTY_APP_ID = "Parse_AppId";
-  public static String PROPERTY_CLIENT_KEY = "Parse_ClientKey";
+    // tiapp.xml properties containing Parse's app id and client key
+    public static String PROPERTY_APP_ID = "Parse_AppId";
+    public static String PROPERTY_CLIENT_KEY = "Parse_ClientKey";
 
 	// You can define constants with @Kroll.constant, for example:
 	// @Kroll.constant public static final String EXTERNAL_NAME = value;
