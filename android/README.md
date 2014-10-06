@@ -33,6 +33,13 @@ To enable Android Push Notifications
     Parse.enablePush();
 ```
 
+To handle received notifications
+
+```javascript
+    Parse.addEventListener('onPushMessageReceived', function(e) {
+        Ti.API.log("Ti.onPushMessageReceived", JSON.stringify(e));
+```
+
 Subscribe or unsubscribe to Parse Channels
 
 ```javascript
