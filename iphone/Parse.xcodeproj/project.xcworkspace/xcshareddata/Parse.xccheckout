@@ -10,29 +10,29 @@
 	<string>Parse</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>8ACEEFDA-89CF-4EA5-B0DE-0C19BA97A8C8</key>
+		<key>4A68C81231DBE1023F4A971B8F98AF3B8A129847</key>
 		<string>ssh://github.com/Rebelic/Parse.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>iphone/Parse.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>8ACEEFDA-89CF-4EA5-B0DE-0C19BA97A8C8</key>
+		<key>4A68C81231DBE1023F4A971B8F98AF3B8A129847</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://github.com/Rebelic/Parse.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>8ACEEFDA-89CF-4EA5-B0DE-0C19BA97A8C8</string>
+	<string>4A68C81231DBE1023F4A971B8F98AF3B8A129847</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>8ACEEFDA-89CF-4EA5-B0DE-0C19BA97A8C8</string>
+			<string>4A68C81231DBE1023F4A971B8F98AF3B8A129847</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Parse</string>
 		</dict>

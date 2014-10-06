@@ -13,14 +13,13 @@
 
 #import "JRSwizzle.h"
 
-
 // Create a category which adds new methods to TiApp
 @implementation TiApp (Facebook)
 
 - (void)parseApplicationDidBecomeActive:(UIApplication *)application
 {
     // If you're successful, you should see the following output from titanium
-    NSLog(@"[DEBUG] RebelFacebookModule#applicationDidBecomeActive");
+    NSLog(@"[DEBUG] RebelParseModule#applicationDidBecomeActive");
     
     // be sure to call the original method
     // note: swizzle will 'swap' implementations, so this is calling the original method,
@@ -34,8 +33,6 @@
     
     // Call the 'activateApp' method to log an app event for use in analytics and advertising reporting.
     [FBAppEvents activateApp];
-    
-    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
 }
 
 @end
@@ -52,7 +49,7 @@
                  withMethod:@selector(parseApplicationDidBecomeActive:)
                       error:&error];
     if(error)
-        NSLog(@"[WARN] Cannot swizzle application:openURL:sourceApplication:annotation: %@", error);
+        NSLog(@"[ERROR] Cannot swizzle application:openURL:sourceApplication:annotation: %@", error);
 }
 
 #pragma mark Internal
@@ -73,13 +70,26 @@
 
 -(void)startup
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *launchOptions = [[TiApp app] launchOptions];
     
+    NSString *applicationId = [[TiApp tiAppProperties] objectForKey:@"rebel.parse.appId"];
+    NSString *clientKey = [[TiApp tiAppProperties] objectForKey:@"rebel.parse.clientKey"];
+    
+    NSLog(@"appId: %@", applicationId);
+    NSLog(@"clientKey: %@", clientKey);
+    
+    [Parse setApplicationId:applicationId
+                  clientKey:clientKey];
+    
     [PFFacebookUtils initializeFacebook];
-    [Parse setApplicationId:@"lv1RFFzbmJuCYAZigzkbLAtCEqDVIQCtm3u5VI63"
-                  clientKey:@"yqPZaWARkGkLeuMZuZDze6Cy2S72DaWmvMpLqx53"];
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    // Set default ACL
+    PFACL *defaultACL = [PFACL ACL];
+    [defaultACL setPublicReadAccess:YES];
+    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
     // this method is called when the module is first loaded
 	// you *must* call the superclass
@@ -94,6 +104,28 @@
 
 	// you *must* call the superclass
 	[super shutdown:sender];
+    
+    [[PFFacebookUtils session] close];
+}
+
+-(void)resumed:(id)note
+{
+	NSLog(@"[DEBUG] facebook resumed");
+    
+    NSDictionary *launchOptions = [[TiApp app] launchOptions];
+    if (launchOptions != nil)
+    {
+        NSString *urlString = [launchOptions objectForKey:@"url"];
+        NSString *sourceApplication = [launchOptions objectForKey:@"source"];
+        
+        if (urlString != nil) {
+            return [FBAppCall handleOpenURL:[NSURL URLWithString:urlString]
+                          sourceApplication:sourceApplication
+                                withSession:[PFFacebookUtils session]];
+        }
+    }
+    
+    return NO;
 }
 
 #pragma mark Cleanup
@@ -134,23 +166,231 @@
 	}
 }
 
-#pragma Public APIs
-
--(id)example:(id)args
+#pragma Authentication
+- (void)signup:(id)args
 {
-	// example method
-	return @"hello world";
+    PFUser *user = [PFUser user];
+    user.username = @"my name";
+    user.password = @"my pass";
+    user.email = @"email@example.com";
+    
+    // other fields can be set just like with PFObject
+    user[@"phone"] = @"415-392-0202";
+    
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            // Hooray! Let them use the app now.
+        } else {
+            NSString *errorString = [error userInfo][@"error"];
+            // Show the errorString somewhere and let the user try again.
+        }
+    }];
 }
 
--(id)exampleProp
+-(void)login:(id)args
 {
-	// example property getter
-	return @"hello world";
+    [PFUser logInWithUsernameInBackground:@"myname" password:@"mypass"
+                                    block:^(PFUser *user, NSError *error) {
+                                        if (user) {
+                                            // Do stuff after successful login.
+                                        } else {
+                                            // The login failed. Check error to see why.
+                                        }
+                                    }];
 }
 
--(void)setExampleProp:(id)value
+-(void)logout:(id)args
 {
-	// example property setter
+    [PFUser logOut];
+}
+
+-(void)resetPassword:(id)email
+{
+    ENSURE_SINGLE_ARG(email, NSString);
+    
+    [PFUser requestPasswordResetForEmailInBackground:email];
+}
+
+-(id)currentUser
+{
+    if(currentUser == nil && [PFUser currentUser] != nil) {
+        currentUser = [[RebelParseUserProxy alloc]init];
+        currentUser.pfObject = [[PFUser currentUser] retain];
+    }
+    
+    return currentUser;
+}
+
+#pragma Facebook
+// Login PFUser using Facebook
+-(void)loginWithFacebook:(id)args
+{
+    NSArray *permissions;
+    KrollCallback *callback;
+    
+    ENSURE_ARG_AT_INDEX(permissions, args, 0, NSArray);
+    ENSURE_ARG_OR_NIL_AT_INDEX(callback, args, 1, KrollCallback);
+    
+    [PFFacebookUtils logInWithPermissions:permissions block:^(PFUser *user, NSError *error) {
+        
+        if (!user) {
+            NSString *errorMessage = nil;
+            if (!error) {
+                NSLog(@"Uh oh. The user cancelled the Facebook login.");
+                
+            } else {
+                NSLog(@"Uh oh. An error occurred: %@", error);
+                errorMessage = [error localizedDescription];
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log In Error"
+                                                                message:errorMessage
+                                                               delegate:nil
+                                                      cancelButtonTitle:nil
+                                                      otherButtonTitles:@"Dismiss", nil];
+                [alert show];
+            }
+        } else {
+            if (user.isNew) {
+                NSLog(@"User with facebook signed up and logged in!");
+            } else {
+                NSLog(@"User with facebook logged in!");
+            }
+            
+            RebelParseUserProxy *currentUser = [[RebelParseUserProxy alloc]init];
+            currentUser.pfObject = [user retain];
+            
+            if(callback) {
+                NSDictionary* result = [NSDictionary dictionaryWithObjectsAndKeys:currentUser, @"user", nil];
+                
+                [self _fireEventToListener:@"completed" withObject:result listener:callback thisObject:self];
+            }
+        }
+    }];
+}
+
+-(void)loginWithFacebookAccessTokenData:(id)args
+{
+    NSDictionary *accessTokenData;
+    
+    ENSURE_ARG_AT_INDEX(accessTokenData, args, 0, NSDictionary);
+    
+    [PFFacebookUtils logInWithFacebookId:[accessTokenData objectForKey:@"facebookId"]
+                            accessToken:[accessTokenData objectForKey:@"accessToken"]
+                            expirationDate:[accessTokenData objectForKey:@"expirationDate"]
+                                   block: ^(PFUser *user, NSError *error) {
+                                       
+       if (!user) {
+           NSString *errorMessage = nil;
+           if (!error) {
+               NSLog(@"Uh oh. The user cancelled the Facebook login.");
+               
+           } else {
+               NSLog(@"Uh oh. An error occurred: %@", error);
+               errorMessage = [error localizedDescription];
+               
+               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log In Error"
+                                                               message:errorMessage
+                                                              delegate:nil
+                                                     cancelButtonTitle:nil
+                                                     otherButtonTitles:@"Dismiss", nil];
+               [alert show];
+           }
+       } else {
+           if (user.isNew) {
+               NSLog(@"User with facebook signed up and logged in!");
+           } else {
+               NSLog(@"User with facebook logged in!");
+           }
+       }
+   }];
+}
+
+#pragma Cloud functions
+-(void)callFunction:(id)args
+{
+    ENSURE_SINGLE_ARG(args, NSDictionary);
+    
+    NSString *function = [args objectForKey:@"function"];
+    NSDictionary *params = [args objectForKey:@"params"];
+    KrollCallback *callback = [args objectForKey:@"callback"];
+    
+    [PFCloud callFunctionInBackground:function
+                       withParameters:@{}
+                                block:^(id result, NSError *error) {
+                                    if([result isKindOfClass:[PFObject class]]) {
+//                                        result = [self convertPFObjectToNSDictionary:object];
+                                    }
+                                    
+                                    NSMutableArray *objects = [[NSMutableArray alloc] init];
+                                    for (id object in result) {
+                                        RebelParseObjectProxy *pfObject = [[RebelParseObjectProxy alloc]init];
+                                        pfObject.pfObject = [object retain];
+                                        
+                                        [objects addObject:pfObject];
+                                    }
+                                    
+                                    if (!error) {
+                                        NSDictionary* result = [NSDictionary dictionaryWithObjectsAndKeys:objects, @"result", nil];
+                                        
+                                        [self _fireEventToListener:@"completed" withObject:result listener:callback thisObject:self];
+                                    }
+                                }];
+}
+
+#pragma Location
+-(void)getLocation:(id)args
+{
+    [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
+        if (!error) {
+            // do something with the new geoPoint
+        }
+    }];
+}
+
+#pragma Events
+-(void)trackEvent:(id)args
+{
+    NSString *event;
+    NSDictionary *properties;
+    
+    ENSURE_ARG_AT_INDEX(event, args, 0, NSString);
+    ENSURE_ARG_OR_NIL_AT_INDEX(properties, args, 1, NSDictionary);
+    
+    [PFAnalytics trackEvent:event dimensions:properties];
+}
+
+#pragma Push Notifications
+-(void)registerDeviceToken:(id)deviceToken
+{
+    ENSURE_SINGLE_ARG(deviceToken, NSString);
+    
+    // Store the deviceToken in the current Installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:[deviceToken dataUsingEncoding:NSUTF8StringEncoding]];
+    [currentInstallation saveInBackground];
+}
+
+-(void)subscribeChannel:(id)channel
+{
+    ENSURE_SINGLE_ARG(channel, NSString);
+    
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation addUniqueObject:channel forKey:@"channels"];
+    [currentInstallation saveInBackground];
+}
+
+-(void)unsubscribeChannel:(id)channel
+{
+    ENSURE_SINGLE_ARG(channel, NSString);
+    
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation removeObject:channel forKey:@"channels"];
+    [currentInstallation saveInBackground];
+}
+
+-(NSArray *)getChannels:(id)args
+{
+    return [PFInstallation currentInstallation].channels;
 }
 
 @end

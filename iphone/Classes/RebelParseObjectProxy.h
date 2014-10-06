@@ -7,8 +7,25 @@
 #import "TiProxy.h"
 #import <Parse/Parse.h>
 
-@interface RebelParseObjectProxy : TiProxy <TiProxyDelegate>
+@interface RebelParseObjectProxy : TiProxy
 
 @property(nonatomic,readwrite,assign) PFObject* pfObject;
+
+-(void)saveObject;
+-(void)saveEventually;
+-(void)saveInBackground:(id)args;
+
+-(void)fetchInBackground:(id)args;
+-(void)refreshInBackground:(id)args;
+-(void)deleteInBackground:(id)args;
+
+-(NSString *)objectId;
+-(NSDate *)createdAt;
+-(NSDate *)updatedAt;
+
+-(id)getValue:(id)args;
+-(void)set:(id)args;
+
+
 
 @end

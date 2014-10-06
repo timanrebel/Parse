@@ -28,6 +28,8 @@
 		24DE9E1211C5FE74003F90F6 /* RebelParseModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* RebelParseModuleAssets.m */; };
 		AA747D9F0F9514B9006C5449 /* RebelParse_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* RebelParse_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		BC1255FB19BDE9AC00CA272D /* RebelParseUserProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = BC1255F919BDE9AC00CA272D /* RebelParseUserProxy.h */; };
+		BC1255FC19BDE9AC00CA272D /* RebelParseUserProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1255FA19BDE9AC00CA272D /* RebelParseUserProxy.m */; };
 		BCB03F7919B78B8000DED4EA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCB03F7819B78B8000DED4EA /* FacebookSDK.framework */; };
 		BCB03F7D19B78BD600DED4EA /* JRSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB03F7B19B78BD600DED4EA /* JRSwizzle.h */; };
 		BCB03F7E19B78BD600DED4EA /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB03F7C19B78BD600DED4EA /* JRSwizzle.m */; };
@@ -68,6 +70,8 @@
 		24DE9E1011C5FE74003F90F6 /* RebelParseModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RebelParseModuleAssets.m; path = Classes/RebelParseModuleAssets.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* RebelParse_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RebelParse_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BC1255F919BDE9AC00CA272D /* RebelParseUserProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RebelParseUserProxy.h; path = Classes/RebelParseUserProxy.h; sourceTree = "<group>"; };
+		BC1255FA19BDE9AC00CA272D /* RebelParseUserProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RebelParseUserProxy.m; path = Classes/RebelParseUserProxy.m; sourceTree = "<group>"; };
 		BCB03F7819B78B8000DED4EA /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = assets/Frameworks/FacebookSDK.framework; sourceTree = "<group>"; };
 		BCB03F7B19B78BD600DED4EA /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
 		BCB03F7C19B78BD600DED4EA /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
@@ -162,6 +166,7 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BCDD78AA19B9DC950090CCFB /* User */,
 				BCE1EBFB19B619FC00ECF758 /* Query */,
 				BCE1EBFA19B619ED00ECF758 /* Object */,
 				24DE9E0F11C5FE74003F90F6 /* RebelParseModuleAssets.h */,
@@ -191,6 +196,15 @@
 			path = Vendor/JRSwizzle;
 			sourceTree = "<group>";
 		};
+		BCDD78AA19B9DC950090CCFB /* User */ = {
+			isa = PBXGroup;
+			children = (
+				BC1255F919BDE9AC00CA272D /* RebelParseUserProxy.h */,
+				BC1255FA19BDE9AC00CA272D /* RebelParseUserProxy.m */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
 		BCE1EBFA19B619ED00ECF758 /* Object */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +232,7 @@
 			files = (
 				BCE1EBFE19B61A2000ECF758 /* RebelParseQueryProxy.h in Headers */,
 				BCB03F7D19B78BD600DED4EA /* JRSwizzle.h in Headers */,
+				BC1255FB19BDE9AC00CA272D /* RebelParseUserProxy.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* RebelParse_Prefix.pch in Headers */,
 				24DD6CF91134B3F500162E58 /* RebelParseModule.h in Headers */,
 				24DE9E1111C5FE74003F90F6 /* RebelParseModuleAssets.h in Headers */,
@@ -298,6 +313,7 @@
 				BCE1EBF919B5E72D00ECF758 /* RebelParseObjectProxy.m in Sources */,
 				BCE1EBFF19B61A2000ECF758 /* RebelParseQueryProxy.m in Sources */,
 				24DE9E1211C5FE74003F90F6 /* RebelParseModuleAssets.m in Sources */,
+				BC1255FC19BDE9AC00CA272D /* RebelParseUserProxy.m in Sources */,
 				BCB03F7E19B78BD600DED4EA /* JRSwizzle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

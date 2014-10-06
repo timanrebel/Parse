@@ -11,14 +11,6 @@
 
 @synthesize pfObject;
 
--(id)init
-{
-    // Enable delegate
-    self.modelDelegate = self;
-	
-	return [super init];
-}
-
 -(void)dealloc
 {
 	RELEASE_TO_NIL(pfObject);
@@ -57,10 +49,9 @@
     [pfObject saveEventually];
 }
 
--(void)saveInBackground:(id)args
+-(void)saveInBackground:(id)callback
 {
-    KrollCallback *callback;
-    ENSURE_ARG_OR_NIL_AT_INDEX(callback, args, 0, KrollCallback);
+    ENSURE_SINGLE_ARG(callback, KrollCallback);
     
     [pfObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if(succeeded)
@@ -74,10 +65,9 @@
     }];
 }
 
--(void)fetchInBackground:(id)args
+-(void)fetchInBackground:(id)callback
 {
-    KrollCallback *callback;
-    ENSURE_ARG_OR_NIL_AT_INDEX(callback, args, 0, KrollCallback);
+    ENSURE_SINGLE_ARG(callback, KrollCallback);
     
     [pfObject fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if(callback) {
@@ -88,10 +78,9 @@
     }];
 }
 
--(void)refreshInBackground:(id)args
+-(void)refreshInBackground:(id)callback
 {
-    KrollCallback *callback;
-    ENSURE_ARG_OR_NIL_AT_INDEX(callback, args, 0, KrollCallback);
+    ENSURE_SINGLE_ARG(callback, KrollCallback);
     
     [pfObject refreshInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if(callback) {
@@ -102,10 +91,9 @@
     }];
 }
 
--(void)deleteInBackground:(id)args
+-(void)deleteInBackground:(id)callback
 {
-    KrollCallback *callback;
-    ENSURE_ARG_OR_NIL_AT_INDEX(callback, args, 0, KrollCallback);
+    ENSURE_SINGLE_ARG(callback, KrollCallback);
     
     [pfObject deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if(callback) {
@@ -117,26 +105,38 @@
 }
 
 #pragma Getters
--(id)objectId
+-(NSString *)id
 {
     return pfObject.objectId;
 }
 
--(id)createdAt
+-(NSString *)objectId
+{
+    return pfObject.objectId;
+}
+
+-(NSDate *)createdAt
 {
     return pfObject.createdAt;
 }
 
--(id)updatedAt
+-(NSDate *)updatedAt
 {
     return pfObject.updatedAt;
 }
 
--(id)getValue:(id)args
+-(id)get:(NSString *)key
 {
-    NSString *key;
+//    ENSURE_SINGLE_ARG(key, NSString);
     
-    ENSURE_ARG_AT_INDEX(key, args, 0, NSString);
+    NSLog(@"key: %@", key);
+    
+    return [pfObject objectForKey:key];
+}
+
+-(id)getValue:(id)key
+{
+    ENSURE_SINGLE_ARG(key, NSString);
 
     return [pfObject objectForKey:key];
 }
@@ -154,32 +154,6 @@
     
     [pfObject setObject:newValue forKey:key];
     NSLog(@"Set");
-    
-    // Fire change event
-	if ([self _hasListeners:@"change"]) {
-		NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:
-							   key, @"property",
-							   oldValue == nil ? [NSNull null] : oldValue, @"oldValue",
-							   newValue == nil ? [NSNull null] : newValue, @"newValue",
-							   nil
-							   ];
-		[self fireEvent:@"change" withObject:event];
-	}
-}
-
-/**
- * Setter for all non defined properties
- */
--(void)propertyChanged:(NSString*)key oldValue:(id)oldValue newValue:(id)newValue proxy:(TiProxy*)proxy
-{
-	if ([oldValue isEqual:newValue]) {
-		// Value didn't really change
-		return;
-	}
-	
-	NSLog(@"[DEBUG] Property %@ changed from %@ to %@", key, oldValue, newValue);
-    
-    pfObject[key] = newValue;
     
     // Fire change event
 	if ([self _hasListeners:@"change"]) {
