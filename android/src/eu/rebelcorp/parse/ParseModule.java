@@ -17,9 +17,10 @@ import org.appcelerator.kroll.common.Log;
 import android.content.Context;
 
 import com.parse.Parse;
-import com.parse.PushService;
+import com.parse.ParsePush;
 import com.parse.ParseAnalytics;
 import com.parse.ParseInstallation;
+import com.parse.PushService;
 
 @Kroll.module(name="Parse", id="eu.rebelcorp.parse")
 public class ParseModule extends KrollModule
@@ -41,6 +42,7 @@ public class ParseModule extends KrollModule
 	public ParseModule()
 	{
 		super();
+        
 		module = this;
 	}
 
@@ -53,40 +55,38 @@ public class ParseModule extends KrollModule
         Log.d(TAG, "Initializing with: " + appId + ", " + clientKey + ";");
         
         Parse.initialize(TiApplication.getInstance(), appId, clientKey);
-        
-        // Track Push opens
-        ParseAnalytics.trackAppOpened(TiApplication.getAppRootOrCurrentActivity().getIntent());
-        Context context = TiApplication.getInstance().getApplicationContext();
-        PushService.setDefaultPushCallback(context, TiApplication.getAppRootOrCurrentActivity().getClass());
     }
 
 	// Methods
 	@Kroll.method
-	public void start(@Kroll.argument String id, @Kroll.argument String client)
+	public void start()
 	{
+        // Track Push opens
+        ParseAnalytics.trackAppOpened(TiApplication.getAppRootOrCurrentActivity().getIntent());
+        
+        ParseInstallation.getCurrentInstallation().saveInBackground();
 	}
 
     @Kroll.method
     public void enablePush() {
-		// Register Push
-		ParseInstallation.getCurrentInstallation().saveInBackground();
+		// Deprecated. Now happens automatically
     }
 
 	@Kroll.method
 	public void subscribeChannel(@Kroll.argument String channel) {
-		Context context = TiApplication.getInstance().getApplicationContext();
-
-		// Add channel
-		PushService.subscribe(context, channel, TiApplication.getAppRootOrCurrentActivity().getClass());
+		ParsePush.subscribeInBackground(channel);
 	}
 
 	@Kroll.method
 	public void unsubscribeChannel(@Kroll.argument String channel) {
-		Context context = TiApplication.getInstance().getApplicationContext();
-
-		// Remove channel
-		PushService.unsubscribe(context, channel);
+		ParsePush.unsubscribeInBackground(channel);
 	}
+    
+    @Kroll.method
+    public void putValue(@Kroll.argument String key, @Kroll.argument Object value) {
+        ParseInstallation.getCurrentInstallation().put(key, value);
+        ParseInstallation.getCurrentInstallation().saveInBackground();
+    }
 
 	public static ParseModule getInstance() {
 		return module;

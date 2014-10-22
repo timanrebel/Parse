@@ -14,7 +14,7 @@ import org.json.JSONObject;
 import android.os.Bundle;
 import java.util.Set;
 import org.appcelerator.kroll.KrollDict;
-
+import org.appcelerator.titanium.TiApplication;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,38 +22,49 @@ import android.content.Intent;
 import android.util.Log;
 import eu.rebelcorp.parse.ParseModule;
 
+import com.parse.ParsePushBroadcastReceiver;
 
-public class ParseModuleBroadcastReceiver extends BroadcastReceiver {
+
+public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
 	private static final String TAG = "ParseModuleBroadcastReceiver";
 
-	@Override
-	public void onReceive(Context context, Intent intent) {
-
-		try {
-
-			if (intent == null) {
-				Log.d(TAG, "Receiver intent null");
-			} else {
-				String action = intent.getAction();
-				Log.d(TAG, "got action " + action );
-
-				if (action.equals("com.google.android.c2dm.intent.RECEIVE")) {
-
-					String data = intent.getExtras().getString("data");
-					Log.d(TAG, "and data " + data);
-
-					JSONObject json = new JSONObject(data);
-					KrollDict dict = new KrollDict(json);
-	        
-	        Log.d(TAG, "in notification.");
-					ParseModule.getInstance().fireEvent("notification", dict);
-
-				}
-			}
-
-		} catch (Exception e) {
-			Log.d(TAG, "Exception: " + e.toString());
-		}
-
-	}
+//    @Override
+//    public void onPushOpen(Context context, Intent intent) {
+//        Log.e("Push", "Clicked");
+//        Intent i = new Intent(context, TiApplication.getAppRootOrCurrentActivity().getClass());
+//        i.putExtras(intent.getExtras());
+//        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        context.startActivity(i);
+//    }
+    
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        
+        try {
+            
+            if (intent == null) {
+                Log.d(TAG, "Receiver intent null");
+            } else {
+                String action = intent.getAction();
+                Log.d(TAG, "got action " + action );
+                
+                if (action.equals("com.google.android.c2dm.intent.RECEIVE")) {
+                    
+                    String data = intent.getExtras().getString("data");
+                    Log.d(TAG, "and data " + data);
+                    
+                    JSONObject json = new JSONObject(data);
+                    KrollDict dict = new KrollDict(json);
+                    
+                    Log.d(TAG, "in notification.");
+                    ParseModule.getInstance().fireEvent("notification", dict);
+                    
+                }
+            }
+            
+        } catch (Exception e) {
+            Log.d(TAG, "Exception: " + e.toString());
+        }
+        
+    }
 }

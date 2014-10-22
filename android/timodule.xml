@@ -17,24 +17,35 @@
                 </intent-filter>
             </receiver>
             <receiver android:name="eu.rebelcorp.parse.ParseModuleBroadcastReceiver"
+                android:exported="false">
+                <intent-filter>
+                    <action android:name="com.parse.push.intent.RECEIVE" />
+                    <action android:name="com.parse.push.intent.DELETE" />
+                    <action android:name="com.parse.push.intent.OPEN" />
+                </intent-filter>
+            </receiver>
+            <receiver android:name="com.parse.GcmBroadcastReceiver"
                 android:permission="com.google.android.c2dm.permission.SEND">
                 <intent-filter>
                     <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                     <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
                     
                     <!--
-                     IMPORTANT: Change "com.parse.tutorials.pushnotifications" to match your app's package name.
+                     IMPORTANT: Change "com.parse.starter" to match your app's package name.
                      -->
                     <category android:name="${tiapp.properties['id']}" />
                 </intent-filter>
             </receiver>
         </application>
+        
         <uses-permission android:name="android.permission.INTERNET" />
         <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-        <uses-permission android:name="android.permission.VIBRATE" />
         <uses-permission android:name="android.permission.WAKE_LOCK" />
+        <uses-permission android:name="android.permission.VIBRATE" />
+        <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
         <uses-permission android:name="android.permission.GET_ACCOUNTS" />
         <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+        
         <permission android:name="${tiapp.properties['id']}.permission.C2D_MESSAGE" android:protectionLevel="signature" />
         <uses-permission android:name="${tiapp.properties['id']}.permission.C2D_MESSAGE" />
         </manifest>
