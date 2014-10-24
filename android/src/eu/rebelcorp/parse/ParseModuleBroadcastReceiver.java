@@ -26,45 +26,63 @@ import com.parse.ParsePushBroadcastReceiver;
 
 
 public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
-	private static final String TAG = "ParseModuleBroadcastReceiver";
 
-//    @Override
-//    public void onPushOpen(Context context, Intent intent) {
-//        Log.e("Push", "Clicked");
-//        Intent i = new Intent(context, TiApplication.getAppRootOrCurrentActivity().getClass());
-//        i.putExtras(intent.getExtras());
-//        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        context.startActivity(i);
-//    }
+    @Override
+    public void onPushOpen(Context context, Intent intent) {
+        Log.e("onPushOpen", "Clicked");
+        
+        Intent i = new Intent(context, TiApplication.getAppRootOrCurrentActivity().getClass());
+        i.putExtras(intent.getExtras());
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);
+    }
     
     @Override
     public void onReceive(Context context, Intent intent) {
+//        super.onReceive(context, intent);
         
         try {
-            
             if (intent == null) {
-                Log.d(TAG, "Receiver intent null");
+                Log.e("onReceive", "Receiver intent null");
             } else {
                 String action = intent.getAction();
-                Log.d(TAG, "got action " + action );
+                Log.e("onReceive", "got action " + action );
                 
-                if (action.equals("com.google.android.c2dm.intent.RECEIVE")) {
-                    
-                    String data = intent.getExtras().getString("data");
-                    Log.d(TAG, "and data " + data);
-                    
-                    JSONObject json = new JSONObject(data);
-                    KrollDict dict = new KrollDict(json);
-                    
-                    Log.d(TAG, "in notification.");
-                    ParseModule.getInstance().fireEvent("notification", dict);
-                    
+                if(ParseModule.getInstance() != null) {
+                
+                    if (action.equals("com.parse.push.intent.RECEIVE")) {
+                        
+                        String data = intent.getExtras().getString("com.parse.Data");
+                        Log.e("onReceive", "and data " + data);
+                        
+                        JSONObject json = new JSONObject(data);
+                        KrollDict dict = new KrollDict(json);
+                        
+                        Log.e("onReceive", "in notification.");
+                        ParseModule.getInstance().fireEvent("notificationreceive", dict);
+                        
+                    }
+                    else if(action.equals("com.parse.push.intent.OPEN")) {
+                        String data = intent.getExtras().getString("com.parse.Data");
+                        Log.e("onReceive", "and data " + data);
+                        
+                        JSONObject json = new JSONObject(data);
+                        KrollDict dict = new KrollDict(json);
+                        
+                        Log.e("onReceive", "opened.");
+                        ParseModule.getInstance().fireEvent("notificationopen", dict);
+                    }
+                }
+                else {
+                    Log.e("onReceive", "no instance of ParseModule found");
                 }
             }
             
         } catch (Exception e) {
-            Log.d(TAG, "Exception: " + e.toString());
+            Log.e("Push", "Exception: " + e.toString());
         }
+        
+        super.onReceive(context, intent);
         
     }
 }
