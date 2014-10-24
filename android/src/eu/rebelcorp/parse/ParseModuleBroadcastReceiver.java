@@ -30,11 +30,21 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
     @Override
     public void onPushOpen(Context context, Intent intent) {
         Log.e("onPushOpen", "Clicked");
-        
-        Intent i = new Intent(context, TiApplication.getAppRootOrCurrentActivity().getClass());
-        i.putExtras(intent.getExtras());
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(i);
+    
+        if(ParseModule.getInstance() != null) {
+            Log.e("onPushOpen", "App is running");
+            Intent i = new Intent(context, TiApplication.getAppRootOrCurrentActivity().getClass());
+            i.putExtras(intent.getExtras());
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(i);
+        }
+        else {
+            Log.e("onPushOpen", "App is not running");
+            
+            Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getApplicationContext().getPackageName());
+            i.putExtras(intent.getExtras());
+            context.startActivity(i);
+        }
     }
     
     @Override
