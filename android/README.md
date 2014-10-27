@@ -18,26 +18,45 @@ we need to put the application id and client key from Parse in your **tiapp.xml*
 
 ```xml
 	<property name="Parse_AppId" type="string">abcdefg</property>
-    <property name="Parse_ClientKey" type="string">hijklmnop</property>
+	<property name="Parse_ClientKey" type="string">hijklmnop</property>
 ```
 
 Put the following code in your app.js (or alloy.js if you are using Alloy) to access the module in Javascript.
 
 ```javascript
 	var Parse = require('eu.rebelcorp.parse');
+	Parse.start();
 ```
 
-To enable Android Push Notifications
+To handle received notifications the moment it arrives at the Android phone
 
 ```javascript
-    Parse.enablePush();
+	Parse.addEventListener('notificationreceive', function(e) {
+		Ti.API.log("notification: ", JSON.stringify(e));
+	});	
 ```
 
-To handle received notifications
+To handle a click on a notification
 
 ```javascript
-    Parse.addEventListener('notification', function(e) {
-        Ti.API.log("notification: ", JSON.stringify(e));
+	Parse.addEventListener('notificationopen', function(e) {
+		Ti.API.log("notification: ", JSON.stringify(e));
+	});	
+```
+
+These events are only fired when the app is running. When the app is not running and a notification is clicked, the app is started and the notification data is added to the launching intent. It can be accessed with the following code:
+
+```
+	var data = Ti.App.Android.launchIntent.getStringExtra('com.parse.Data');
+
+	if(data) {
+		try {
+			var json = JSON.parse(data);
+			
+			// Now handle the click on the notification
+		}
+			catch(e) {}
+	}
 ```
 
 Subscribe or unsubscribe to Parse Channels
@@ -47,14 +66,16 @@ Subscribe or unsubscribe to Parse Channels
     Parse.unsubscribeChannel('user_123');
 ```
 
-
 ## Known Issues
 
-* Not all of the API is exposed at the moment
-* Incoming Push Notifications are not exposed when clicked upon
-
+* None
 
 ## Changelog
+**[v0.5](https://github.com/timanrebel/Parse/releases/tag/0.5)**
+- Upgraded to latest Parse SDK
+- Changed events from `notification` to `notificationreceive` and `notificationopen`
+- Added `com.parse.Data` to launching intent
+
 **[v0.3](https://github.com/timanrebel/Parse/releases/tag/0.3)**
 - Fire `notification` event when new notification is received.
 
