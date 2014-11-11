@@ -14,12 +14,14 @@ Download the latest [distribution ZIP-file](https://github.com/timanrebel/Parse/
 ### Example
 
 Because the module needs to load and initialize during the startup of your Application to properly support Push Notifications,
-we need to put the application id and client key from Parse in your **tiapp.xml** file:
+we need to put the application id and client key from Parse in your `tiapp.xml` file:
 
 ```xml
 	<property name="Parse_AppId" type="string">abcdefg</property>
 	<property name="Parse_ClientKey" type="string">hijklmnop</property>
 ```
+
+**Please note:** You should not add any other Parse tags to your `manifest` section in your `tiapp.xml` file, this module does this all for you. If you do, it will result in displaying Push Notifications multiple times.
 
 Put the following code in your app.js (or alloy.js if you are using Alloy) to access the module in Javascript.
 
