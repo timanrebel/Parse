@@ -21,6 +21,9 @@ import com.parse.ParsePush;
 import com.parse.ParseAnalytics;
 import com.parse.ParseInstallation;
 import com.parse.PushService;
+import com.parse.ParseUser;
+import com.parse.LogInCallback;
+import com.parse.ParseException;
 
 @Kroll.module(name="Parse", id="eu.rebelcorp.parse")
 public class ParseModule extends KrollModule
@@ -70,6 +73,19 @@ public class ParseModule extends KrollModule
     @Kroll.method
     public void enablePush() {
 		// Deprecated. Now happens automatically
+    }
+    
+    @Kroll.method
+    public void authenticate(@Kroll.argument String sessionToken) {
+        ParseUser.becomeInBackground(sessionToken, new LogInCallback() {
+            public void done(ParseUser user, ParseException e) {
+                if (user != null) {
+                    // Hooray! The user is logged in.
+                } else {
+                    // Signup failed. Look at the ParseException to see what happened.
+                }
+            }
+        });
     }
 
 	@Kroll.method
