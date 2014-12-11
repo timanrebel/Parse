@@ -27,6 +27,10 @@ Put the following code in your app.js (or alloy.js if you are using Alloy) to ac
 
 ```javascript
 	var Parse = require('eu.rebelcorp.parse');
+	
+	// only authenticate if you have a session token from Parse already
+	Parse.authenticate('<your session token>');
+	
 	Parse.start();
 ```
 
@@ -73,6 +77,9 @@ Subscribe or unsubscribe to Parse Channels
 * None
 
 ## Changelog
+**[v0.6](https://github.com/timanrebel/Parse/releases/tag/0.6)**
+- Added support for `authenticate(String sessionToken)` to authenticate the saving of the Parse Installation.
+
 **[v0.5](https://github.com/timanrebel/Parse/releases/tag/0.5)**
 - Upgraded to latest Parse SDK
 - Changed events from `notification` to `notificationreceive` and `notificationopen`
