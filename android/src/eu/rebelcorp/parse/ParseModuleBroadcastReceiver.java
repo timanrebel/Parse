@@ -12,16 +12,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.Bundle;
+
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
+
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.titanium.TiApplication;
 
+import android.app.ActivityManager;
+import android.app.ActivityManager.RecentTaskInfo;
+import android.app.ActivityManager.RunningTaskInfo;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import eu.rebelcorp.parse.ParseModule;
 
+import eu.rebelcorp.parse.ParseModule;
 import com.parse.ParsePushBroadcastReceiver;
 
 
@@ -33,10 +40,12 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
     
         if(ParseModule.getInstance() != null) {
             Log.d("onPushOpen", "App is running");
-            Intent i = new Intent(context, TiApplication.getAppRootOrCurrentActivity().getClass());
-            i.putExtras(intent.getExtras());
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(i);
+//            Intent i = new Intent(context, TiApplication.getAppRootOrCurrentActivity().getClass());
+//            i.putExtras(intent.getExtras());
+//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            context.startActivity(i);
+            
+            bringFront(context);
         }
         else {
             Log.d("onPushOpen", "App is not running");
@@ -94,5 +103,34 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
         
         super.onReceive(context, intent);
         
+    }
+
+    private static boolean bringFront(Context context) {
+        boolean flag = true;
+        String packageName = context.getApplicationContext().getPackageName();
+        try {
+            final ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+            final List<RecentTaskInfo> recentTasks = activityManager.getRecentTasks(Integer.MAX_VALUE, ActivityManager.RECENT_IGNORE_UNAVAILABLE);
+            
+            RecentTaskInfo recentTaskInfo = null;
+             
+            for (int i = 0; i < recentTasks.size(); i++) 
+            {
+                if (recentTasks.get(i).baseIntent.getComponent().getPackageName().equals(packageName)) {
+                   recentTaskInfo = recentTasks.get(i);
+                   break;
+                }
+            }
+             
+            if(recentTaskInfo != null && recentTaskInfo.id > -1) {
+                activityManager.moveTaskToFront(recentTaskInfo.persistentId, ActivityManager.MOVE_TASK_WITH_HOME);
+                return flag;
+            }
+            
+        } catch (Exception exception) {
+            flag = false;
+            exception.printStackTrace();
+        }
+        return flag;
     }
 }
