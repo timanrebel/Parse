@@ -72,11 +72,28 @@ Subscribe or unsubscribe to Parse Channels
     Parse.unsubscribeChannel('user_123');
 ```
 
+Get the installation id
+
+```javascript
+    Parse.getCurrentInstallationId();
+```
+
+Get the object id of the installation
+
+```javascript
+    Parse.getObjectId();
+```
+
+
 ## Known Issues
 
 * None
 
 ## Changelog
+**[v0.7](https://github.com/timanrebel/Parse/releases/tag/0.7)**
+- Add support for Appcelerator SDK 4.0.0
+- Add support for retreiving objectId and installation id
+
 **[v0.6](https://github.com/timanrebel/Parse/releases/tag/0.6)**
 - Added support for `authenticate(String sessionToken)` to authenticate the saving of the Parse Installation.
 
