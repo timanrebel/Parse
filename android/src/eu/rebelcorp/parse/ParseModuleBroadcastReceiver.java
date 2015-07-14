@@ -33,10 +33,6 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
     
         if(ParseModule.getInstance() != null) {
             Log.d("onPushOpen", "App is running");
-            Intent i = new Intent(context, TiApplication.getAppRootOrCurrentActivity().getClass());
-            i.putExtras(intent.getExtras());
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(i);
         }
         else {
             Log.d("onPushOpen", "App is not running");

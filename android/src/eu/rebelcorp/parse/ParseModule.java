@@ -23,6 +23,7 @@ import com.parse.ParseInstallation;
 import com.parse.PushService;
 import com.parse.ParseUser;
 import com.parse.LogInCallback;
+import com.parse.SaveCallback;
 import com.parse.ParseException;
 
 @Kroll.module(name="Parse", id="eu.rebelcorp.parse")
@@ -34,7 +35,7 @@ public class ParseModule extends KrollModule
 	
 	// Standard Debugging variables
 	private static final String TAG = "ParseModule";
-  
+
     // tiapp.xml properties containing Parse's app id and client key
     public static String PROPERTY_APP_ID = "Parse_AppId";
     public static String PROPERTY_CLIENT_KEY = "Parse_ClientKey";
@@ -67,7 +68,13 @@ public class ParseModule extends KrollModule
         // Track Push opens
         ParseAnalytics.trackAppOpened(TiApplication.getAppRootOrCurrentActivity().getIntent());
         
-        ParseInstallation.getCurrentInstallation().saveInBackground();
+        ParseInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Installation initialization failed: " + e.getMessage());
+                }
+            }
+        });
 	}
 
     @Kroll.method
@@ -102,6 +109,16 @@ public class ParseModule extends KrollModule
     public void putValue(@Kroll.argument String key, @Kroll.argument Object value) {
         ParseInstallation.getCurrentInstallation().put(key, value);
         ParseInstallation.getCurrentInstallation().saveInBackground();
+    }
+
+    @Kroll.method
+    public String getCurrentInstallationId() {
+        return ParseInstallation.getCurrentInstallation().getInstallationId();
+    }
+
+    @Kroll.method
+    public String getObjectId() {
+        return ParseInstallation.getCurrentInstallation().getObjectId();
     }
 
 	public static ParseModule getInstance() {
