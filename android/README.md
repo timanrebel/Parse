@@ -90,6 +90,9 @@ Get the object id of the installation
 * None
 
 ## Changelog
+**[v0.8](https://github.com/timanrebel/Parse/releases/tag/0.8)**
+- Resume the app on notification click if it was in background.
+
 **[v0.7](https://github.com/timanrebel/Parse/releases/tag/0.7)**
 - Add support for Appcelerator SDK 4.0.0
 - Add support for retreiving objectId and installation id
