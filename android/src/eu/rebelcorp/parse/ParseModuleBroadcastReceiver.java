@@ -12,7 +12,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.Bundle;
-import java.util.Set;
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.titanium.TiApplication;
 
@@ -30,65 +29,69 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
     @Override
     public void onPushOpen(Context context, Intent intent) {
         Log.d("onPushOpen", "Clicked");
-    
-        if(ParseModule.getInstance() != null) {
-            Log.d("onPushOpen", "App is running");
+
+        if (ParseModule.getInstance() != null && ParseModule.getInstance().isModuleRunning()) {
+            Log.d("onPushOpen", "App is running in foreground");
+            return;
         }
-        else {
-            Log.d("onPushOpen", "App is not running");
-            
-            Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getApplicationContext().getPackageName());
-            i.putExtras(intent.getExtras());
-            context.startActivity(i);
+
+
+        Log.d("onPushOpen", "App is not running or is in background. Now resume the app.");
+        Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getApplicationContext().getPackageName());
+        i.putExtras(intent.getExtras());
+        context.startActivity(i);
+
+        /* Now, the module should be opened */
+        if (ParseModule.getInstance() != null) {
+            try {
+                Log.d("onPushOpen", "Open a notification");
+                KrollDict data = new KrollDict(new JSONObject(intent.getExtras().getString("com.parse.Data")));
+                ParseModule.getInstance().fireEvent("notificationopen", data);
+            } catch (Exception e) {
+                Log.d("JSON Failure", e.getMessage());
+            }
         }
     }
     
     @Override
     public void onReceive(Context context, Intent intent) {
-//        super.onReceive(context, intent);
-        
         try {
             if (intent == null) {
                 Log.d("onReceive", "Receiver intent null");
-            } else {
-                String action = intent.getAction();
-                Log.d("onReceive", "got action " + action );
-                
-                if(ParseModule.getInstance() != null) {
-                
-                    if (action.equals("com.parse.push.intent.RECEIVE")) {
-                        
-                        String data = intent.getExtras().getString("com.parse.Data");
-                        Log.d("onReceive", "and data " + data);
-                        
-                        JSONObject json = new JSONObject(data);
-                        KrollDict dict = new KrollDict(json);
-                        
-                        Log.d("onReceive", "in notification.");
-                        ParseModule.getInstance().fireEvent("notificationreceive", dict);
-                        
-                    }
-                    else if(action.equals("com.parse.push.intent.OPEN")) {
-                        String data = intent.getExtras().getString("com.parse.Data");
-                        Log.d("onReceive", "and data " + data);
-                        
-                        JSONObject json = new JSONObject(data);
-                        KrollDict dict = new KrollDict(json);
-                        
-                        Log.d("onReceive", "opened.");
-                        ParseModule.getInstance().fireEvent("notificationopen", dict);
-                    }
+                return;
+            }
+
+            if (ParseModule.getInstance() == null) {
+                Log.d("onReceive", "no instance of ParseModule found");
+                return;
+            }
+
+            String action = intent.getAction();
+            KrollDict data = new KrollDict(new JSONObject(intent.getExtras().getString("com.parse.Data")));
+
+            Log.d("onReceive", "got action " + action );
+            if (action.equals("com.parse.push.intent.RECEIVE")) {
+                /* The notification is received by the device */
+                Log.d("onReceive", "New notification received");
+
+                if (ParseModule.getInstance().isModuleRunning()) {
+                    ParseModule.getInstance().fireEvent("notificationreceive", data);
+                } else {
+                    Log.d("onReceive", "App is in background, the event won't be triggered");
                 }
-                else {
-                    Log.d("onReceive", "no instance of ParseModule found");
+            } else if (action.equals("com.parse.push.intent.OPEN")) {
+                /* The user has clicked on the notification */
+                Log.d("onReceive", "Notification opened");
+
+                if (ParseModule.getInstance().isModuleRunning()) {
+                    ParseModule.getInstance().fireEvent("notificationopen", data);
+                } else {
+                    Log.d("onReceive", "App is in background, the event will be triggered later.");
                 }
             }
-            
         } catch (Exception e) {
             Log.e("Push", "Exception: " + e.toString());
         }
-        
         super.onReceive(context, intent);
-        
     }
 }
