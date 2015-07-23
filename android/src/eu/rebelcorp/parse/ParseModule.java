@@ -15,6 +15,7 @@ import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.kroll.common.Log;
 
 import android.content.Context;
+import android.app.Activity;
 
 import com.parse.Parse;
 import com.parse.ParsePush;
@@ -30,44 +31,93 @@ import com.parse.ParseException;
 public class ParseModule extends KrollModule
 {
 
-	// Module instance
-	private static ParseModule module;
-	
-	// Standard Debugging variables
-	private static final String TAG = "ParseModule";
+    // Module instance
+    private static ParseModule module;
+
+    // Standard Debugging variables
+    private static final String TAG = "ParseModule";
 
     // tiapp.xml properties containing Parse's app id and client key
     public static String PROPERTY_APP_ID = "Parse_AppId";
     public static String PROPERTY_CLIENT_KEY = "Parse_ClientKey";
 
-	// You can define constants with @Kroll.constant, for example:
-	// @Kroll.constant public static final String EXTERNAL_NAME = value;
+    /* Control the state of the activity */
+    private boolean isModuleRunning;
 
-	public ParseModule()
-	{
-		super();
-        
-		module = this;
-	}
+    // You can define constants with @Kroll.constant, for example:
+    // @Kroll.constant public static final String EXTERNAL_NAME = value;
 
-	@Kroll.onAppCreate
-	public static void onAppCreate(TiApplication app)
-	{
+    public ParseModule()
+    {
+        super();
+        module = this;
+    }
+
+    @Kroll.onAppCreate
+    public static void onAppCreate(TiApplication app)
+    {
         String appId = TiApplication.getInstance().getAppProperties().getString(ParseModule.PROPERTY_APP_ID, "");
         String clientKey = TiApplication.getInstance().getAppProperties().getString(ParseModule.PROPERTY_CLIENT_KEY, "");
-        
+
         Log.d(TAG, "Initializing with: " + appId + ", " + clientKey + ";");
-        
+
         Parse.initialize(TiApplication.getInstance(), appId, clientKey);
     }
 
-	// Methods
-	@Kroll.method
-	public void start()
-	{
+    /* Get control over the module's state */
+    public void onStart(Activity activity)
+    {
+        super.onStart(activity);
+        setIsModuleRunning(true);
+    }
+
+    public void onResume(Activity activity)
+    {
+        super.onResume(activity);
+        setIsModuleRunning(true);
+    }
+
+    public void onPause(Activity activity)
+    {
+        super.onPause(activity);
+        setIsModuleRunning(false);
+    }
+
+    public void onStop(Activity activity)
+    {
+        super.onStop(activity);
+        setIsModuleRunning(false);
+    }
+
+    public void onDestroy(Activity activity)
+    {
+        super.onDestroy(activity);
+        setIsModuleRunning(false);
+    }
+
+    private void setIsModuleRunning(boolean isModuleRunning)
+    {
+        this.isModuleRunning = isModuleRunning;
+    }
+
+    /* An accessor from the outside */
+    public boolean isModuleRunning()
+    {
+        return isModuleRunning;
+    }
+
+    /* Get an instance of that module*/
+    public static ParseModule getInstance() {
+        return module;
+    }
+
+    // Methods
+    @Kroll.method
+    public void start()
+    {
         // Track Push opens
         ParseAnalytics.trackAppOpened(TiApplication.getAppRootOrCurrentActivity().getIntent());
-        
+
         ParseInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
             public void done(ParseException e) {
                 if (e != null) {
@@ -75,13 +125,13 @@ public class ParseModule extends KrollModule
                 }
             }
         });
-	}
+    }
 
     @Kroll.method
     public void enablePush() {
-		// Deprecated. Now happens automatically
+        // Deprecated. Now happens automatically
     }
-    
+
     @Kroll.method
     public void authenticate(@Kroll.argument String sessionToken) {
         ParseUser.becomeInBackground(sessionToken, new LogInCallback() {
@@ -95,16 +145,16 @@ public class ParseModule extends KrollModule
         });
     }
 
-	@Kroll.method
-	public void subscribeChannel(@Kroll.argument String channel) {
-		ParsePush.subscribeInBackground(channel);
-	}
+    @Kroll.method
+    public void subscribeChannel(@Kroll.argument String channel) {
+        ParsePush.subscribeInBackground(channel);
+    }
 
-	@Kroll.method
-	public void unsubscribeChannel(@Kroll.argument String channel) {
-		ParsePush.unsubscribeInBackground(channel);
-	}
-    
+    @Kroll.method
+    public void unsubscribeChannel(@Kroll.argument String channel) {
+        ParsePush.unsubscribeInBackground(channel);
+    }
+
     @Kroll.method
     public void putValue(@Kroll.argument String key, @Kroll.argument Object value) {
         ParseInstallation.getCurrentInstallation().put(key, value);
@@ -120,9 +170,4 @@ public class ParseModule extends KrollModule
     public String getObjectId() {
         return ParseInstallation.getCurrentInstallation().getObjectId();
     }
-
-	public static ParseModule getInstance() {
-		return module;
-	}
-
 }
