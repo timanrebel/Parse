@@ -30,13 +30,11 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
     @Override
     public void onPushOpen(Context context, Intent intent) {
         Log.d("onPushOpen", "Clicked");
-    
-        if(ParseModule.getInstance() != null) {
-            Log.d("onPushOpen", "App is running");
-        }
-        else {
-            Log.d("onPushOpen", "App is not running");
-            
+
+        if (ParseModule.getInstance() != null && ParseModule.getInstance().isModuleRunning()) {
+            Log.d("onPushOpen", "App is running in foreground");
+        } else {
+            Log.d("onPushOpen", "App is not running or is in background");
             Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getApplicationContext().getPackageName());
             i.putExtras(intent.getExtras());
             context.startActivity(i);
