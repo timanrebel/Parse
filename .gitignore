@@ -3,3 +3,4 @@ build.log
 .DS_Store
 android/build.properties
 parse.jar
+cloudcode/config/local.json
