@@ -16,6 +16,7 @@ import org.appcelerator.kroll.common.Log;
 
 import android.content.Context;
 import android.app.Activity;
+import android.provider.Settings.Secure;
 
 import com.parse.Parse;
 import com.parse.ParsePush;
@@ -122,6 +123,7 @@ public class ParseModule extends KrollModule
         ParseAnalytics.trackAppOpened(TiApplication.getAppRootOrCurrentActivity().getIntent());
         setState(STATE_RUNNING);
 
+        ParseInstallation.getCurrentInstallation().put("androidId", getAndroidId());
         ParseInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
             public void done(ParseException e) {
                 if (e != null) {
@@ -173,5 +175,10 @@ public class ParseModule extends KrollModule
     @Kroll.method
     public String getObjectId() {
         return ParseInstallation.getCurrentInstallation().getObjectId();
+    }
+
+    protected String getAndroidId() {
+        Context context = TiApplication.getInstance().getApplicationContext();
+        return Secure.getString(context.getContentResolver(), Secure.ANDROID_ID);
     }
 }
