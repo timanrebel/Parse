@@ -16,6 +16,7 @@ import org.appcelerator.kroll.common.Log;
 
 import android.content.Context;
 import android.app.Activity;
+import android.provider.Settings.Secure;
 
 import com.parse.Parse;
 import com.parse.ParsePush;
@@ -41,8 +42,12 @@ public class ParseModule extends KrollModule
     public static String PROPERTY_APP_ID = "Parse_AppId";
     public static String PROPERTY_CLIENT_KEY = "Parse_ClientKey";
 
+    public static final int STATE_RUNNING = 1;
+    public static final int STATE_STOPPED = 2;
+    public static final int STATE_DESTROYED = 3;
+
     /* Control the state of the activity */
-    private boolean isModuleRunning;
+    private int state = STATE_DESTROYED;
 
     // You can define constants with @Kroll.constant, for example:
     // @Kroll.constant public static final String EXTERNAL_NAME = value;
@@ -51,7 +56,6 @@ public class ParseModule extends KrollModule
     {
         super();
         module = this;
-        setIsModuleRunning(true);
     }
 
     @Kroll.onAppCreate
@@ -61,7 +65,6 @@ public class ParseModule extends KrollModule
         String clientKey = TiApplication.getInstance().getAppProperties().getString(ParseModule.PROPERTY_CLIENT_KEY, "");
 
         Log.d(TAG, "Initializing with: " + appId + ", " + clientKey + ";");
-
         Parse.initialize(TiApplication.getInstance(), appId, clientKey);
     }
 
@@ -69,42 +72,42 @@ public class ParseModule extends KrollModule
     public void onStart(Activity activity)
     {
         super.onStart(activity);
-        setIsModuleRunning(true);
+        setState(STATE_RUNNING);
     }
 
     public void onResume(Activity activity)
     {
         super.onResume(activity);
-        setIsModuleRunning(true);
+        setState(STATE_RUNNING);
     }
 
     public void onPause(Activity activity)
     {
         super.onPause(activity);
-        setIsModuleRunning(false);
+        setState(STATE_STOPPED);
     }
 
     public void onStop(Activity activity)
     {
         super.onStop(activity);
-        setIsModuleRunning(false);
+        setState(STATE_STOPPED);
     }
 
     public void onDestroy(Activity activity)
     {
         super.onDestroy(activity);
-        setIsModuleRunning(false);
+        setState(STATE_DESTROYED);
     }
 
-    private void setIsModuleRunning(boolean isModuleRunning)
+    private void setState(int state)
     {
-        this.isModuleRunning = isModuleRunning;
+        this.state = state;
     }
 
     /* An accessor from the outside */
-    public boolean isModuleRunning()
+    public int getState()
     {
-        return isModuleRunning;
+        return state;
     }
 
     /* Get an instance of that module*/
@@ -118,7 +121,9 @@ public class ParseModule extends KrollModule
     {
         // Track Push opens
         ParseAnalytics.trackAppOpened(TiApplication.getAppRootOrCurrentActivity().getIntent());
+        setState(STATE_RUNNING);
 
+        ParseInstallation.getCurrentInstallation().put("androidId", getAndroidId());
         ParseInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
             public void done(ParseException e) {
                 if (e != null) {
@@ -170,5 +175,10 @@ public class ParseModule extends KrollModule
     @Kroll.method
     public String getObjectId() {
         return ParseInstallation.getCurrentInstallation().getObjectId();
+    }
+
+    protected String getAndroidId() {
+        Context context = TiApplication.getInstance().getApplicationContext();
+        return Secure.getString(context.getContentResolver(), Secure.ANDROID_ID);
     }
 }

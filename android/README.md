@@ -84,12 +84,45 @@ Get the object id of the installation
     Parse.getObjectId();
 ```
 
+## Parse CloudCode
+
+Android by design has no deviceToken like iOS has. Everytime you install an app on Android the deviceToken will change. This means that when a user re-installs an app, a duplicate Parse installation will be registered and the user will get 2 push notifications if no measures have been taken.
+See for reference this [StackOverflow](http://stackoverflow.com/questions/2785485/is-there-a-unique-android-device-id) thread.
+
+This can be easily overcome since version 0.9 of this module using the strategy found on [Parse questions](https://www.parse.com/questions/check-for-duplicate-installations-of-same-user-on-re-installation-of-app).
+
+### Deploy Parse Cloudcode
+
+First install the CLI tool:
+```
+    curl -s https://www.parse.com/downloads/cloud_code/installer.sh | sudo /bin/bash
+```
+Go the Cloudcode directory in this repo and issue the following commands:
+```
+    echo "{}" > config/local.json
+    parse add --local
+    parse default "your parse app name"
+```
+
+If you've set your application as default you can now deploy:
+```
+    parse deploy
+```
+
+This will create your CloudCode application which resolves the duplicate Android installs by inspecting the AndroidID.
+
+Checkout the [Parse Manual](https://www.parse.com/docs/js/guide#cloud-code) for further information.
 
 ## Known Issues
 
-* None
+* The current implementation does __NOT__ work in combination with the [Facebook module](https://github.com/appcelerator-modules/ti.facebook) provided by [Appcelerator](https://github.com/appcelerator). The Facebook module has a dependency onto the Boltz framework version 1.1.2, whereas Parse Android SDK 1.9.4 has a dependency onto version 1.2.0.
 
 ## Changelog
+**[v0.9](https://github.com/timanrebel/Parse/releases/tag/0.9)**
+- Upgrade to latest Parse SDK version 1.9.4
+- Add AndroidID to installation registration to be able to detect duplicate installs
+- Add optional Parse CloudCode installation
+
 **[v0.8](https://github.com/timanrebel/Parse/releases/tag/0.8)**
 - Resume the app on notification click if it was in background.
 
