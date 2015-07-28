@@ -119,10 +119,9 @@ public class ParseModule extends KrollModule
     @Kroll.method
     public void start()
     {
+        setState(STATE_RUNNING);
         // Track Push opens
         ParseAnalytics.trackAppOpened(TiApplication.getAppRootOrCurrentActivity().getIntent());
-        setState(STATE_RUNNING);
-
         ParseInstallation.getCurrentInstallation().put("androidId", getAndroidId());
         ParseInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
             public void done(ParseException e) {
