@@ -73,7 +73,7 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
             }
 
             /* The notification is received by the device */
-            if (ParseModule.getInstance().getState() == ParseModule.STATE_RUNNING) {
+            if (ParseModule.getInstance().getState() != ParseModule.STATE_DESTROYED) {
                 Log.d("onPushReceive", "App is in foreground; trigger event 'notificationreceive'");
 
                 try {
@@ -83,7 +83,7 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
                     Log.d("onPushReceive", e.getMessage());
                 }
             } else {
-                Log.d("onPushReceive", "App is in background; 'notificationreceive' won't be triggered");
+                Log.d("onPushReceive", "App is not alive; 'notificationreceive' won't be triggered");
             }
 
             super.onPushReceive(context, intent);
