@@ -118,7 +118,7 @@ Checkout the [Parse Manual](https://www.parse.com/docs/js/guide#cloud-code) for 
 * The current implementation does __NOT__ work in combination with the [Facebook module](https://github.com/appcelerator-modules/ti.facebook) provided by [Appcelerator](https://github.com/appcelerator). The Facebook module has a dependency onto the Boltz framework version 1.1.2, whereas Parse Android SDK 1.9.4 has a dependency onto version 1.2.0.
 
 ## Changelog
-**[v0.10]**
+**[v0.10](https://github.com/timanrebel/Parse/releases/tag/0.10)**
 - Fix minor typo in cloud code
 - Trigger 'notificationreceive' when the app is in background but not killed.
 
