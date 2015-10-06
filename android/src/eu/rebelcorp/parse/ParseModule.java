@@ -121,7 +121,7 @@ public class ParseModule extends KrollModule
     {
         setState(STATE_RUNNING);
         // Track Push opens
-        ParseAnalytics.trackAppOpened(TiApplication.getAppRootOrCurrentActivity().getIntent());
+        ParseAnalytics.trackAppOpenedInBackground(TiApplication.getAppRootOrCurrentActivity().getIntent());
         ParseInstallation.getCurrentInstallation().put("androidId", getAndroidId());
         ParseInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
             public void done(ParseException e) {
@@ -174,6 +174,13 @@ public class ParseModule extends KrollModule
     @Kroll.method
     public String getObjectId() {
         return ParseInstallation.getCurrentInstallation().getObjectId();
+    }
+    
+    @Kroll.method
+    public void notificationClear() {
+        TiApplication context = TiApplication.getInstance();
+        NotificationManager notifiyMgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notifiyMgr.cancelAll();
     }
 
     protected String getAndroidId() {

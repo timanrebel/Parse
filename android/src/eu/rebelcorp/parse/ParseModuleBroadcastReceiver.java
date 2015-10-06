@@ -40,7 +40,7 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
             Log.d("onPushOpen", "App was killed; resume the app without triggering 'notificationopen'");
             i.putExtras(intent.getExtras());
             context.startActivity(i);
-            //return;
+            return;
         }
 
 
