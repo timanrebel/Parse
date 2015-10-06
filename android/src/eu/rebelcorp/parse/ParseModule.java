@@ -15,6 +15,8 @@ import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.kroll.common.Log;
 
 import android.content.Context;
+import android.app.Activity;
+import android.provider.Settings.Secure;
 
 import com.parse.Parse;
 import com.parse.ParsePush;
@@ -23,58 +25,118 @@ import com.parse.ParseInstallation;
 import com.parse.PushService;
 import com.parse.ParseUser;
 import com.parse.LogInCallback;
+import com.parse.SaveCallback;
 import com.parse.ParseException;
 
 @Kroll.module(name="Parse", id="eu.rebelcorp.parse")
 public class ParseModule extends KrollModule
 {
 
-	// Module instance
-	private static ParseModule module;
-	
-	// Standard Debugging variables
-	private static final String TAG = "ParseModule";
-  
+    // Module instance
+    private static ParseModule module;
+
+    // Standard Debugging variables
+    private static final String TAG = "ParseModule";
+
     // tiapp.xml properties containing Parse's app id and client key
     public static String PROPERTY_APP_ID = "Parse_AppId";
     public static String PROPERTY_CLIENT_KEY = "Parse_ClientKey";
 
-	// You can define constants with @Kroll.constant, for example:
-	// @Kroll.constant public static final String EXTERNAL_NAME = value;
+    public static final int STATE_RUNNING = 1;
+    public static final int STATE_STOPPED = 2;
+    public static final int STATE_DESTROYED = 3;
 
-	public ParseModule()
-	{
-		super();
-        
-		module = this;
-	}
+    /* Control the state of the activity */
+    private int state = STATE_DESTROYED;
 
-	@Kroll.onAppCreate
-	public static void onAppCreate(TiApplication app)
-	{
+    // You can define constants with @Kroll.constant, for example:
+    // @Kroll.constant public static final String EXTERNAL_NAME = value;
+
+    public ParseModule()
+    {
+        super();
+        module = this;
+    }
+
+    @Kroll.onAppCreate
+    public static void onAppCreate(TiApplication app)
+    {
         String appId = TiApplication.getInstance().getAppProperties().getString(ParseModule.PROPERTY_APP_ID, "");
         String clientKey = TiApplication.getInstance().getAppProperties().getString(ParseModule.PROPERTY_CLIENT_KEY, "");
-        
+
         Log.d(TAG, "Initializing with: " + appId + ", " + clientKey + ";");
-        
         Parse.initialize(TiApplication.getInstance(), appId, clientKey);
     }
 
-	// Methods
-	@Kroll.method
-	public void start()
-	{
+    /* Get control over the module's state */
+    public void onStart(Activity activity)
+    {
+        super.onStart(activity);
+        setState(STATE_RUNNING);
+    }
+
+    public void onResume(Activity activity)
+    {
+        super.onResume(activity);
+        setState(STATE_RUNNING);
+    }
+
+    public void onPause(Activity activity)
+    {
+        super.onPause(activity);
+        setState(STATE_STOPPED);
+    }
+
+    public void onStop(Activity activity)
+    {
+        super.onStop(activity);
+        setState(STATE_STOPPED);
+    }
+
+    public void onDestroy(Activity activity)
+    {
+        super.onDestroy(activity);
+        setState(STATE_DESTROYED);
+    }
+
+    private void setState(int state)
+    {
+        this.state = state;
+    }
+
+    /* An accessor from the outside */
+    public int getState()
+    {
+        return state;
+    }
+
+    /* Get an instance of that module*/
+    public static ParseModule getInstance() {
+        return module;
+    }
+
+    // Methods
+    @Kroll.method
+    public void start()
+    {
+        setState(STATE_RUNNING);
         // Track Push opens
         ParseAnalytics.trackAppOpened(TiApplication.getAppRootOrCurrentActivity().getIntent());
-        
-        ParseInstallation.getCurrentInstallation().saveInBackground();
-	}
+        ParseInstallation.getCurrentInstallation().put("androidId", getAndroidId());
+        ParseInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Installation initialization failed: " + e.getMessage());
+                }
+            }
+        });
+    }
 
     @Kroll.method
     public void enablePush() {
-		// Deprecated. Now happens automatically
+        // Deprecated. Now happens automatically
     }
-    
+
     @Kroll.method
     public void authenticate(@Kroll.argument String sessionToken) {
         ParseUser.becomeInBackground(sessionToken, new LogInCallback() {
@@ -88,24 +150,34 @@ public class ParseModule extends KrollModule
         });
     }
 
-	@Kroll.method
-	public void subscribeChannel(@Kroll.argument String channel) {
-		ParsePush.subscribeInBackground(channel);
-	}
+    @Kroll.method
+    public void subscribeChannel(@Kroll.argument String channel) {
+        ParsePush.subscribeInBackground(channel);
+    }
 
-	@Kroll.method
-	public void unsubscribeChannel(@Kroll.argument String channel) {
-		ParsePush.unsubscribeInBackground(channel);
-	}
-    
+    @Kroll.method
+    public void unsubscribeChannel(@Kroll.argument String channel) {
+        ParsePush.unsubscribeInBackground(channel);
+    }
+
     @Kroll.method
     public void putValue(@Kroll.argument String key, @Kroll.argument Object value) {
         ParseInstallation.getCurrentInstallation().put(key, value);
         ParseInstallation.getCurrentInstallation().saveInBackground();
     }
 
-	public static ParseModule getInstance() {
-		return module;
-	}
+    @Kroll.method
+    public String getCurrentInstallationId() {
+        return ParseInstallation.getCurrentInstallation().getInstallationId();
+    }
 
+    @Kroll.method
+    public String getObjectId() {
+        return ParseInstallation.getCurrentInstallation().getObjectId();
+    }
+
+    protected String getAndroidId() {
+        Context context = TiApplication.getInstance().getApplicationContext();
+        return Secure.getString(context.getContentResolver(), Secure.ANDROID_ID);
+    }
 }

@@ -13,10 +13,6 @@ import org.json.JSONObject;
 
 import android.os.Bundle;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.titanium.TiApplication;
 
@@ -36,101 +32,67 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
 
     @Override
     public void onPushOpen(Context context, Intent intent) {
-        Log.d("onPushOpen", "Clicked");
-    
-        if(ParseModule.getInstance() != null) {
-            Log.d("onPushOpen", "App is running");
-//            Intent i = new Intent(context, TiApplication.getAppRootOrCurrentActivity().getClass());
-//            i.putExtras(intent.getExtras());
-//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            context.startActivity(i);
-            
-            bringFront(context);
-        }
-        else {
-            Log.d("onPushOpen", "App is not running");
-            
-            Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getApplicationContext().getPackageName());
+        Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getApplicationContext().getPackageName());
+
+        /* Check if the app is running or in background. If not, just start the app and add the
+         * notification as Extra */
+        if (ParseModule.getInstance() == null || ParseModule.getInstance().getState() == ParseModule.STATE_DESTROYED) {
+            Log.d("onPushOpen", "App was killed; resume the app without triggering 'notificationopen'");
             i.putExtras(intent.getExtras());
             context.startActivity(i);
+            //return;
+        }
+
+
+        /* Otherwise, just resume the app if necessary, and trigger the event */
+        try {
+            KrollDict data = new KrollDict(new JSONObject(intent.getExtras().getString("com.parse.Data")));
+
+            if (ParseModule.getInstance().getState() != ParseModule.STATE_RUNNING) {
+                Log.d("onPushOpen", "App was in background; resume the app and trigger 'notificationopen'");
+                context.startActivity(i);
+            } else {
+                Log.d("onPushOpen", "App is running in foreground; trigger 'notificationopen'");
+            }
+
+            ParseModule.getInstance().fireEvent("notificationopen", data);
+        } catch (Exception e) {
+            Log.d("onPushOpen", e.getMessage());
         }
     }
-    
+
     @Override
-    public void onReceive(Context context, Intent intent) {
-//        super.onReceive(context, intent);
-        
+    public void onPushReceive(Context context, Intent intent) {
         try {
             if (intent == null) {
-                Log.d("onReceive", "Receiver intent null");
-            } else {
-                String action = intent.getAction();
-                Log.d("onReceive", "got action " + action );
-                
-                if(ParseModule.getInstance() != null) {
-                
-                    if (action.equals("com.parse.push.intent.RECEIVE")) {
-                        
-                        String data = intent.getExtras().getString("com.parse.Data");
-                        Log.d("onReceive", "and data " + data);
-                        
-                        JSONObject json = new JSONObject(data);
-                        KrollDict dict = new KrollDict(json);
-                        
-                        Log.d("onReceive", "in notification.");
-                        ParseModule.getInstance().fireEvent("notificationreceive", dict);
-                        
-                    }
-                    else if(action.equals("com.parse.push.intent.OPEN")) {
-                        String data = intent.getExtras().getString("com.parse.Data");
-                        Log.d("onReceive", "and data " + data);
-                        
-                        JSONObject json = new JSONObject(data);
-                        KrollDict dict = new KrollDict(json);
-                        
-                        Log.d("onReceive", "opened.");
-                        ParseModule.getInstance().fireEvent("notificationopen", dict);
-                    }
-                }
-                else {
-                    Log.d("onReceive", "no instance of ParseModule found");
-                }
+                Log.d("onPushReceive", "Receiver intent null");
+                super.onPushReceive(context, intent);
+                return;
             }
-            
+
+            if (ParseModule.getInstance() == null) {
+                Log.d("onPushReceive", "No instance of ParseModule found");
+                super.onPushReceive(context, intent);
+                return;
+            }
+
+            /* The notification is received by the device */
+            if (ParseModule.getInstance().getState() != ParseModule.STATE_DESTROYED) {
+                Log.d("onPushReceive", "App is in foreground; trigger event 'notificationreceive'");
+
+                try {
+                    KrollDict data = new KrollDict(new JSONObject(intent.getExtras().getString("com.parse.Data")));
+                    ParseModule.getInstance().fireEvent("notificationreceive", data);
+                } catch (Exception e) {
+                    Log.d("onPushReceive", e.getMessage());
+                }
+            } else {
+                Log.d("onPushReceive", "App is not alive; 'notificationreceive' won't be triggered");
+            }
+
+            super.onPushReceive(context, intent);
         } catch (Exception e) {
             Log.e("Push", "Exception: " + e.toString());
         }
-        
-        super.onReceive(context, intent);
-        
-    }
-
-    private static boolean bringFront(Context context) {
-        boolean flag = true;
-        String packageName = context.getApplicationContext().getPackageName();
-        try {
-            final ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-            final List<RecentTaskInfo> recentTasks = activityManager.getRecentTasks(Integer.MAX_VALUE, ActivityManager.RECENT_IGNORE_UNAVAILABLE);
-            
-            RecentTaskInfo recentTaskInfo = null;
-             
-            for (int i = 0; i < recentTasks.size(); i++) 
-            {
-                if (recentTasks.get(i).baseIntent.getComponent().getPackageName().equals(packageName)) {
-                   recentTaskInfo = recentTasks.get(i);
-                   break;
-                }
-            }
-             
-            if(recentTaskInfo != null && recentTaskInfo.id > -1) {
-                activityManager.moveTaskToFront(recentTaskInfo.persistentId, ActivityManager.MOVE_TASK_WITH_HOME);
-                return flag;
-            }
-            
-        } catch (Exception exception) {
-            flag = false;
-            exception.printStackTrace();
-        }
-        return flag;
     }
 }
