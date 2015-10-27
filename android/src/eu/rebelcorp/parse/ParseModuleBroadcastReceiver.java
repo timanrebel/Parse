@@ -101,7 +101,7 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
 
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                notification.color = context.getResources().getColor(TiRHelper.getResource("color.notification_color"));
+                notification.color = context.getResources().getColor(TiRHelper.getResource("color.parse_notification_color"));
             }
         } catch (Exception e){
             Log.e("Push", "Exception: " + e.toString());
