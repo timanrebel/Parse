@@ -6,4 +6,6 @@
 // for this file:
 // http://developer.apple.com/mac/library/documentation/DeveloperTools/Conceptual/XcodeBuildSystem/400-Build_Configurations/build_configs.html
 
-OTHER_LDFLAGS=$(inherited) -framework Parse -weak_framework Accounts -framework AdSupport -framework AudioToolbox -framework CFNetwork -framework CoreLocation -framework MobileCoreServices -framework QuartzCore -framework Security -weak_framework Social -framework StoreKit -framework SystemConfiguration -framework Foundation -framework UIKit -framework CoreGraphics
+FRAMEWORK_SEARCH_PATHS=$(SRCROOT)/../../modules/iphone/eu.rebelcorp.parse/0.1.0/assets/Frameworks
+
+OTHER_LDFLAGS=$(inherited) -framework Bolts -framework Parse
