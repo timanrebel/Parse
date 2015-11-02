@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -22,34 +22,29 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		24DD6CF91134B3F500162E58 /* RebelParseModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* RebelParseModule.h */; };
-		24DD6CFA1134B3F500162E58 /* RebelParseModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* RebelParseModule.m */; };
-		24DE9E1111C5FE74003F90F6 /* RebelParseModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* RebelParseModuleAssets.h */; };
-		24DE9E1211C5FE74003F90F6 /* RebelParseModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* RebelParseModuleAssets.m */; };
+		24DD6CF91134B3F500162E58 /* EuRebelcorpParseModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* EuRebelcorpParseModule.h */; };
+		24DD6CFA1134B3F500162E58 /* EuRebelcorpParseModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* EuRebelcorpParseModule.m */; };
+		24DE9E1111C5FE74003F90F6 /* EuRebelcorpParseModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* EuRebelcorpParseModuleAssets.h */; };
+		24DE9E1211C5FE74003F90F6 /* EuRebelcorpParseModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* EuRebelcorpParseModuleAssets.m */; };
 		AA747D9F0F9514B9006C5449 /* RebelParse_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* RebelParse_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		BC1255FB19BDE9AC00CA272D /* RebelParseUserProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = BC1255F919BDE9AC00CA272D /* RebelParseUserProxy.h */; };
 		BC1255FC19BDE9AC00CA272D /* RebelParseUserProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1255FA19BDE9AC00CA272D /* RebelParseUserProxy.m */; };
-		BCB03F7919B78B8000DED4EA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCB03F7819B78B8000DED4EA /* FacebookSDK.framework */; };
-		BCB03F7D19B78BD600DED4EA /* JRSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB03F7B19B78BD600DED4EA /* JRSwizzle.h */; };
-		BCB03F7E19B78BD600DED4EA /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB03F7C19B78BD600DED4EA /* JRSwizzle.m */; };
 		BCE1EBCF19B5C00100ECF758 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBCE19B5C00100ECF758 /* AudioToolbox.framework */; };
 		BCE1EBD119B5C00700ECF758 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBD019B5C00700ECF758 /* CFNetwork.framework */; };
 		BCE1EBD319B5C00D00ECF758 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBD219B5C00D00ECF758 /* CoreGraphics.framework */; };
 		BCE1EBD519B5C01200ECF758 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBD419B5C01200ECF758 /* CoreLocation.framework */; };
-		BCE1EBD719B5C01A00ECF758 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBD619B5C01A00ECF758 /* libz.dylib */; };
 		BCE1EBD919B5C02000ECF758 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBD819B5C02000ECF758 /* MobileCoreServices.framework */; };
 		BCE1EBDB19B5C02500ECF758 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBDA19B5C02500ECF758 /* QuartzCore.framework */; };
 		BCE1EBDD19B5C02B00ECF758 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBDC19B5C02B00ECF758 /* Security.framework */; };
 		BCE1EBDF19B5C02F00ECF758 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBDE19B5C02F00ECF758 /* StoreKit.framework */; };
 		BCE1EBE119B5C03400ECF758 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBE019B5C03400ECF758 /* SystemConfiguration.framework */; };
-		BCE1EBE519B5C05000ECF758 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBE219B5C05000ECF758 /* Bolts.framework */; };
-		BCE1EBE719B5C05000ECF758 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBE419B5C05000ECF758 /* ParseFacebookUtils.framework */; };
-		BCE1EBF119B5D47D00ECF758 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE1EBF019B5D47D00ECF758 /* Parse.framework */; };
 		BCE1EBF819B5E72D00ECF758 /* RebelParseObjectProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = BCE1EBF619B5E72D00ECF758 /* RebelParseObjectProxy.h */; };
 		BCE1EBF919B5E72D00ECF758 /* RebelParseObjectProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE1EBF719B5E72D00ECF758 /* RebelParseObjectProxy.m */; };
 		BCE1EBFE19B61A2000ECF758 /* RebelParseQueryProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = BCE1EBFC19B61A2000ECF758 /* RebelParseQueryProxy.h */; };
 		BCE1EBFF19B61A2000ECF758 /* RebelParseQueryProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE1EBFD19B61A2000ECF758 /* RebelParseQueryProxy.m */; };
+		C26447251BE782EB00FDD5E8 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C26447231BE782EB00FDD5E8 /* Bolts.framework */; };
+		C26447261BE782EB00FDD5E8 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C26447241BE782EB00FDD5E8 /* Parse.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,36 +58,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		24DD6CF71134B3F500162E58 /* RebelParseModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RebelParseModule.h; path = Classes/RebelParseModule.h; sourceTree = "<group>"; };
-		24DD6CF81134B3F500162E58 /* RebelParseModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RebelParseModule.m; path = Classes/RebelParseModule.m; sourceTree = "<group>"; };
+		24DD6CF71134B3F500162E58 /* EuRebelcorpParseModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EuRebelcorpParseModule.h; path = Classes/EuRebelcorpParseModule.h; sourceTree = "<group>"; };
+		24DD6CF81134B3F500162E58 /* EuRebelcorpParseModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EuRebelcorpParseModule.m; path = Classes/EuRebelcorpParseModule.m; sourceTree = "<group>"; };
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
-		24DE9E0F11C5FE74003F90F6 /* RebelParseModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RebelParseModuleAssets.h; path = Classes/RebelParseModuleAssets.h; sourceTree = "<group>"; };
-		24DE9E1011C5FE74003F90F6 /* RebelParseModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RebelParseModuleAssets.m; path = Classes/RebelParseModuleAssets.m; sourceTree = "<group>"; };
+		24DE9E0F11C5FE74003F90F6 /* EuRebelcorpParseModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EuRebelcorpParseModuleAssets.h; path = Classes/EuRebelcorpParseModuleAssets.h; sourceTree = "<group>"; };
+		24DE9E1011C5FE74003F90F6 /* EuRebelcorpParseModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EuRebelcorpParseModuleAssets.m; path = Classes/EuRebelcorpParseModuleAssets.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* RebelParse_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RebelParse_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BC1255F919BDE9AC00CA272D /* RebelParseUserProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RebelParseUserProxy.h; path = Classes/RebelParseUserProxy.h; sourceTree = "<group>"; };
 		BC1255FA19BDE9AC00CA272D /* RebelParseUserProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RebelParseUserProxy.m; path = Classes/RebelParseUserProxy.m; sourceTree = "<group>"; };
-		BCB03F7819B78B8000DED4EA /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = assets/Frameworks/FacebookSDK.framework; sourceTree = "<group>"; };
-		BCB03F7B19B78BD600DED4EA /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
-		BCB03F7C19B78BD600DED4EA /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
 		BCE1EBCE19B5C00100ECF758 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		BCE1EBD019B5C00700ECF758 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		BCE1EBD219B5C00D00ECF758 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		BCE1EBD419B5C01200ECF758 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		BCE1EBD619B5C01A00ECF758 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BCE1EBD819B5C02000ECF758 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		BCE1EBDA19B5C02500ECF758 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BCE1EBDC19B5C02B00ECF758 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BCE1EBDE19B5C02F00ECF758 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BCE1EBE019B5C03400ECF758 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		BCE1EBE219B5C05000ECF758 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = assets/Frameworks/Bolts.framework; sourceTree = "<group>"; };
-		BCE1EBE419B5C05000ECF758 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = assets/Frameworks/ParseFacebookUtils.framework; sourceTree = "<group>"; };
-		BCE1EBF019B5D47D00ECF758 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = assets/Frameworks/Parse.framework; sourceTree = "<group>"; };
 		BCE1EBF619B5E72D00ECF758 /* RebelParseObjectProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RebelParseObjectProxy.h; path = Classes/RebelParseObjectProxy.h; sourceTree = "<group>"; };
 		BCE1EBF719B5E72D00ECF758 /* RebelParseObjectProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RebelParseObjectProxy.m; path = Classes/RebelParseObjectProxy.m; sourceTree = "<group>"; };
 		BCE1EBFC19B61A2000ECF758 /* RebelParseQueryProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RebelParseQueryProxy.h; path = Classes/RebelParseQueryProxy.h; sourceTree = "<group>"; };
 		BCE1EBFD19B61A2000ECF758 /* RebelParseQueryProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RebelParseQueryProxy.m; path = Classes/RebelParseQueryProxy.m; sourceTree = "<group>"; };
-		D2AAC07E0554694100DB518D /* libRebelParse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRebelParse.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C26447231BE782EB00FDD5E8 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = assets/Frameworks/Bolts.framework; sourceTree = "<group>"; };
+		C26447241BE782EB00FDD5E8 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = assets/Frameworks/Parse.framework; sourceTree = "<group>"; };
+		D2AAC07E0554694100DB518D /* libeu.rebelcorp.parse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libeu.rebelcorp.parse.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,20 +90,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCE1EBE719B5C05000ECF758 /* ParseFacebookUtils.framework in Frameworks */,
 				BCE1EBE119B5C03400ECF758 /* SystemConfiguration.framework in Frameworks */,
 				BCE1EBDF19B5C02F00ECF758 /* StoreKit.framework in Frameworks */,
 				BCE1EBDD19B5C02B00ECF758 /* Security.framework in Frameworks */,
-				BCE1EBE519B5C05000ECF758 /* Bolts.framework in Frameworks */,
 				BCE1EBDB19B5C02500ECF758 /* QuartzCore.framework in Frameworks */,
 				BCE1EBD919B5C02000ECF758 /* MobileCoreServices.framework in Frameworks */,
-				BCE1EBD719B5C01A00ECF758 /* libz.dylib in Frameworks */,
 				BCE1EBD519B5C01200ECF758 /* CoreLocation.framework in Frameworks */,
 				BCE1EBD319B5C00D00ECF758 /* CoreGraphics.framework in Frameworks */,
-				BCE1EBF119B5D47D00ECF758 /* Parse.framework in Frameworks */,
-				BCB03F7919B78B8000DED4EA /* FacebookSDK.framework in Frameworks */,
 				BCE1EBD119B5C00700ECF758 /* CFNetwork.framework in Frameworks */,
+				C26447251BE782EB00FDD5E8 /* Bolts.framework in Frameworks */,
 				BCE1EBCF19B5C00100ECF758 /* AudioToolbox.framework in Frameworks */,
+				C26447261BE782EB00FDD5E8 /* Parse.framework in Frameworks */,
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -124,7 +111,7 @@
 		034768DFFF38A50411DB9C8B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC07E0554694100DB518D /* libRebelParse.a */,
+				D2AAC07E0554694100DB518D /* libeu.rebelcorp.parse.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,7 +119,6 @@
 		0867D691FE84028FC02AAC07 /* Parse */ = {
 			isa = PBXGroup;
 			children = (
-				BCB03F7A19B78BD600DED4EA /* JRSwizzle */,
 				08FB77AEFE84172EC02AAC07 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
@@ -144,16 +130,13 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BCB03F7819B78B8000DED4EA /* FacebookSDK.framework */,
-				BCE1EBF019B5D47D00ECF758 /* Parse.framework */,
-				BCE1EBE219B5C05000ECF758 /* Bolts.framework */,
-				BCE1EBE419B5C05000ECF758 /* ParseFacebookUtils.framework */,
+				C26447231BE782EB00FDD5E8 /* Bolts.framework */,
+				C26447241BE782EB00FDD5E8 /* Parse.framework */,
 				BCE1EBE019B5C03400ECF758 /* SystemConfiguration.framework */,
 				BCE1EBDE19B5C02F00ECF758 /* StoreKit.framework */,
 				BCE1EBDC19B5C02B00ECF758 /* Security.framework */,
 				BCE1EBDA19B5C02500ECF758 /* QuartzCore.framework */,
 				BCE1EBD819B5C02000ECF758 /* MobileCoreServices.framework */,
-				BCE1EBD619B5C01A00ECF758 /* libz.dylib */,
 				BCE1EBD419B5C01200ECF758 /* CoreLocation.framework */,
 				BCE1EBD219B5C00D00ECF758 /* CoreGraphics.framework */,
 				BCE1EBD019B5C00700ECF758 /* CFNetwork.framework */,
@@ -169,10 +152,10 @@
 				BCDD78AA19B9DC950090CCFB /* User */,
 				BCE1EBFB19B619FC00ECF758 /* Query */,
 				BCE1EBFA19B619ED00ECF758 /* Object */,
-				24DE9E0F11C5FE74003F90F6 /* RebelParseModuleAssets.h */,
-				24DE9E1011C5FE74003F90F6 /* RebelParseModuleAssets.m */,
-				24DD6CF71134B3F500162E58 /* RebelParseModule.h */,
-				24DD6CF81134B3F500162E58 /* RebelParseModule.m */,
+				24DE9E0F11C5FE74003F90F6 /* EuRebelcorpParseModuleAssets.h */,
+				24DE9E1011C5FE74003F90F6 /* EuRebelcorpParseModuleAssets.m */,
+				24DD6CF71134B3F500162E58 /* EuRebelcorpParseModule.h */,
+				24DD6CF81134B3F500162E58 /* EuRebelcorpParseModule.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -184,16 +167,6 @@
 				24DD6D1B1134B66800162E58 /* titanium.xcconfig */,
 			);
 			name = "Other Sources";
-			sourceTree = "<group>";
-		};
-		BCB03F7A19B78BD600DED4EA /* JRSwizzle */ = {
-			isa = PBXGroup;
-			children = (
-				BCB03F7B19B78BD600DED4EA /* JRSwizzle.h */,
-				BCB03F7C19B78BD600DED4EA /* JRSwizzle.m */,
-			);
-			name = JRSwizzle;
-			path = Vendor/JRSwizzle;
 			sourceTree = "<group>";
 		};
 		BCDD78AA19B9DC950090CCFB /* User */ = {
@@ -231,11 +204,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCE1EBFE19B61A2000ECF758 /* RebelParseQueryProxy.h in Headers */,
-				BCB03F7D19B78BD600DED4EA /* JRSwizzle.h in Headers */,
 				BC1255FB19BDE9AC00CA272D /* RebelParseUserProxy.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* RebelParse_Prefix.pch in Headers */,
-				24DD6CF91134B3F500162E58 /* RebelParseModule.h in Headers */,
-				24DE9E1111C5FE74003F90F6 /* RebelParseModuleAssets.h in Headers */,
+				24DD6CF91134B3F500162E58 /* EuRebelcorpParseModule.h in Headers */,
+				24DE9E1111C5FE74003F90F6 /* EuRebelcorpParseModuleAssets.h in Headers */,
 				BCE1EBF819B5E72D00ECF758 /* RebelParseObjectProxy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,7 +229,7 @@
 			);
 			name = Parse;
 			productName = Parse;
-			productReference = D2AAC07E0554694100DB518D /* libRebelParse.a */;
+			productReference = D2AAC07E0554694100DB518D /* libeu.rebelcorp.parse.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -266,9 +238,10 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0710;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "Parse" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -309,12 +282,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24DD6CFA1134B3F500162E58 /* RebelParseModule.m in Sources */,
+				24DD6CFA1134B3F500162E58 /* EuRebelcorpParseModule.m in Sources */,
 				BCE1EBF919B5E72D00ECF758 /* RebelParseObjectProxy.m in Sources */,
 				BCE1EBFF19B61A2000ECF758 /* RebelParseQueryProxy.m in Sources */,
-				24DE9E1211C5FE74003F90F6 /* RebelParseModuleAssets.m in Sources */,
+				24DE9E1211C5FE74003F90F6 /* EuRebelcorpParseModuleAssets.m in Sources */,
 				BC1255FC19BDE9AC00CA272D /* RebelParseUserProxy.m in Sources */,
-				BCB03F7E19B78BD600DED4EA /* JRSwizzle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,16 +307,17 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DSTROOT = /tmp/RebelParse.dst;
+				DSTROOT = /tmp/eu.rebelcorp.parse.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/assets/Frameworks",
 					"$(PROJECT_DIR)/assets",
+					"$(PROJECT_DIR)",
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = RebelParse_Prefix.pch;
+				GCC_PREFIX_HEADER = eu.rebelcorp.parse_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = "";
@@ -357,13 +330,14 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = (
 					"-DDEBUG",
 					"-DTI_POST_1_2",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = RebelParse;
+				PRODUCT_NAME = eu.rebelcorp.parse;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -377,16 +351,17 @@
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				DSTROOT = /tmp/RebelParse.dst;
+				DSTROOT = /tmp/eu.rebelcorp.parse.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/assets/Frameworks",
 					"$(PROJECT_DIR)/assets",
+					"$(PROJECT_DIR)",
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = RebelParse_Prefix.pch;
+				GCC_PREFIX_HEADER = eu.rebelcorp.parse_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = "";
@@ -399,11 +374,11 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = RebelParse;
+				PRODUCT_NAME = eu.rebelcorp.parse;
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -418,6 +393,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DSTROOT = /tmp/RebelParse.dst;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -434,6 +410,8 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-DDEBUG",
 					"-DTI_POST_1_2",
@@ -445,6 +423,7 @@
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "x86_64 i386 arm64 armv7";
 			};
 			name = Debug;
 		};
@@ -471,13 +450,14 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = RebelParse;
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "x86_64 i386 arm64 armv7";
 			};
 			name = Release;
 		};

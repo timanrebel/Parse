@@ -11,17 +11,17 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>4A68C81231DBE1023F4A971B8F98AF3B8A129847</key>
-		<string>ssh://github.com/Rebelic/Parse.git</string>
+		<string>https://github.com/timanrebel/Parse.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>iphone/Parse.xcodeproj/project.xcworkspace</string>
+	<string>iphone/Parse.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>4A68C81231DBE1023F4A971B8F98AF3B8A129847</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/Rebelic/Parse.git</string>
+	<string>https://github.com/timanrebel/Parse.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

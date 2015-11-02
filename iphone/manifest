@@ -11,7 +11,8 @@ copyright: Copyright (c) 2014 by Timan Rebel
 
 # these should not be edited
 name: Parse
-moduleid: rebel.Parse
+moduleid: eu.rebelcorp.parse
 guid: e700fd13-7783-4f1c-9201-1442922524fc
 platform: iphone
-minsdk: 3.3.0.GA
+minsdk: 3.5.1.GA
+architectures: armv7 i386 x86_64 arm64
