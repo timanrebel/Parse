@@ -22,6 +22,7 @@ import android.util.Log;
 import eu.rebelcorp.parse.ParseModule;
 
 import com.parse.ParsePushBroadcastReceiver;
+import com.parse.ParseAnalytics;
 
 
 public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
@@ -29,6 +30,7 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
     @Override
     public void onPushOpen(Context context, Intent intent) {
         Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getApplicationContext().getPackageName());
+        ParseAnalytics.trackAppOpenedInBackground(intent);
 
         /* Check if the app is running or in background. If not, just start the app and add the
          * notification as Extra */
@@ -38,7 +40,6 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
             context.startActivity(i);
             return;
         }
-
 
         /* Otherwise, just resume the app if necessary, and trigger the event */
         try {
