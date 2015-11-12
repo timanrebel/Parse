@@ -29,7 +29,7 @@
                 <intent-filter>
                     <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                     <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-                    
+
                     <!--
                      IMPORTANT: Change "com.parse.starter" to match your app's package name.
                      -->
@@ -37,7 +37,7 @@
                 </intent-filter>
             </receiver>
         </application>
-        
+
         <uses-permission android:name="android.permission.INTERNET" />
         <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
         <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -46,9 +46,6 @@
         <uses-permission android:name="android.permission.GET_ACCOUNTS" />
         <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-        <uses-permission android:name="android.permission.GET_TASKS" />
-        <uses-permission android:name="android.permission.REORDER_TASKS" />
-        
         <permission android:name="${tiapp.properties['id']}.permission.C2D_MESSAGE" android:protectionLevel="signature" />
         <uses-permission android:name="${tiapp.properties['id']}.permission.C2D_MESSAGE" />
         </manifest>
