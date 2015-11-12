@@ -14,6 +14,7 @@ import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.kroll.common.Log;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.app.Activity;
 import android.provider.Settings.Secure;
