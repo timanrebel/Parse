@@ -27,10 +27,10 @@ Put the following code in your app.js (or alloy.js if you are using Alloy) to ac
 
 ```javascript
 	var Parse = require('eu.rebelcorp.parse');
-	
+
 	// only authenticate if you have a session token from Parse already
 	Parse.authenticate('<your session token>');
-	
+
 	Parse.start();
 ```
 
@@ -39,7 +39,7 @@ To handle received notifications the moment it arrives at the Android phone
 ```javascript
 	Parse.addEventListener('notificationreceive', function(e) {
 		Ti.API.log("notification: ", JSON.stringify(e));
-	});	
+	});
 ```
 
 To handle a click on a notification
@@ -47,7 +47,7 @@ To handle a click on a notification
 ```javascript
 	Parse.addEventListener('notificationopen', function(e) {
 		Ti.API.log("notification: ", JSON.stringify(e));
-	});	
+	});
 ```
 
 These events are only fired when the app is running. When the app is not running and a notification is clicked, the app is started and the notification data is added to the launching intent. It can be accessed with the following code:
@@ -58,7 +58,7 @@ These events are only fired when the app is running. When the app is not running
 	if(data) {
 		try {
 			var json = JSON.parse(data);
-			
+
 			// Now handle the click on the notification
 		}
 			catch(e) {}
@@ -119,14 +119,14 @@ By default the app icon is used, however on Lollipop and above this icon is conv
 
 Parse allow you to customise this icon by adding a meta tag to the android manifest inside of your tiapp.xml file. More details can be found here: [https://parse.com/tutorials/android-push-notifications](https://parse.com/tutorials/android-push-notifications)
 
-The basic format is 
+The basic format is
 ```
 <meta-data android:name="com.parse.push.notification_icon" android:resource="@drawable/push_icon"/>
 ```
 
 Next add an image `push_icon.png` of 72x72px in white and transparent pixels, to your platform dir `platform/android/res/drawable/push_icon.png`.
 
-If you want to change the background color of the notification circle, change the value in file module `modules/eu.rebelcorp.parse/0.11/platform/android/res/values/colors.xml`.
+If you want to change the background color of the notification circle, override the value `parse_notification_color` in your `platform/android/res/values/colors.xml`.
 
 ## Known Issues
 
@@ -168,8 +168,8 @@ If you want to change the background color of the notification circle, change th
 
 ## Author
 
-**Timan Rebel**  
-twitter: @timanrebel  
+**Timan Rebel**
+twitter: @timanrebel
 
 
 ## License
