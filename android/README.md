@@ -175,6 +175,11 @@ If you want to change the background color of the notification circle, override 
 **Timan Rebel**
 twitter: @timanrebel
 
+## Contributors
+**[Jeroen van Dijk](https://github.com/jvandijk)**
+**[Fokke Zandbergen](https://github.com/FokkeZB)**
+**[Matthias Benkort](https://github.com/KtorZ)**
+**[Thibault Lenclos](https://github.com/tlenclos)**
 
 ## License
 
