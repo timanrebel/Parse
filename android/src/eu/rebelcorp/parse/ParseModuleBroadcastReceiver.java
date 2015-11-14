@@ -14,15 +14,18 @@ import org.json.JSONObject;
 import android.os.Bundle;
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.titanium.TiApplication;
+import org.appcelerator.titanium.util.TiRHelper;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import eu.rebelcorp.parse.ParseModule;
+import android.R;
+import android.os.Build;
+import android.app.Notification;
 
 import com.parse.ParsePushBroadcastReceiver;
-
 
 public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
 
@@ -90,5 +93,20 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
         } catch (Exception e) {
             Log.e("Push", "Exception: " + e.toString());
         }
+    }
+
+    @Override
+    protected Notification getNotification(Context context, Intent intent) {
+        Notification notification = super.getNotification(context, intent);
+
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                notification.color = context.getResources().getColor(TiRHelper.getResource("color.parse_notification_color"));
+            }
+        } catch (Exception e){
+            Log.e("Push", "Exception: " + e.toString());
+        }
+
+        return notification;
     }
 }

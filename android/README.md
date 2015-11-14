@@ -113,6 +113,21 @@ This will create your CloudCode application which resolves the duplicate Android
 
 Checkout the [Parse Manual](https://www.parse.com/docs/js/guide#cloud-code) for further information.
 
+## Notification image and color
+
+By default the app icon is used, however on Lollipop and above this icon is converted to a white mask. Often this isn't suitable.
+
+Parse allow you to customise this icon by adding a meta tag to the android manifest inside of your tiapp.xml file. More details can be found here: [https://parse.com/tutorials/android-push-notifications](https://parse.com/tutorials/android-push-notifications)
+
+The basic format is 
+```
+<meta-data android:name="com.parse.push.notification_icon" android:resource="@drawable/push_icon"/>
+```
+
+Next add an image `push_icon.png` of 72x72px in white and transparent pixels, to your platform dir `platform/android/res/drawable/push_icon.png`.
+
+If you want to change the background color of the notification circle, change the value in file module `modules/eu.rebelcorp.parse/0.11/platform/android/res/values/colors.xml`.
+
 ## Known Issues
 
 * The current implementation does __NOT__ work in combination with the [Facebook module](https://github.com/appcelerator-modules/ti.facebook) provided by [Appcelerator](https://github.com/appcelerator). The Facebook module has a dependency onto the Boltz framework version 1.1.2, whereas Parse Android SDK 1.9.4 has a dependency onto version 1.2.0.
