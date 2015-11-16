@@ -4,3 +4,4 @@ build.log
 android/build.properties
 parse.jar
 cloudcode/config/local.json
+iphone/build

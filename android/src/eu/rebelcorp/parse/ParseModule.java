@@ -73,6 +73,17 @@ public class ParseModule extends KrollModule
     {
         super.onStart(activity);
         setState(STATE_RUNNING);
+
+        // Track app opens
+        ParseAnalytics.trackAppOpened(TiApplication.getAppRootOrCurrentActivity().getIntent());
+        ParseInstallation.getCurrentInstallation().put("androidId", getAndroidId());
+        ParseInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Installation initialization failed: " + e.getMessage());
+                }
+            }
+        });
     }
 
     public void onResume(Activity activity)
@@ -116,40 +127,6 @@ public class ParseModule extends KrollModule
     }
 
     // Methods
-    @Kroll.method
-    public void start()
-    {
-        setState(STATE_RUNNING);
-        // Track Push opens
-        ParseAnalytics.trackAppOpened(TiApplication.getAppRootOrCurrentActivity().getIntent());
-        ParseInstallation.getCurrentInstallation().put("androidId", getAndroidId());
-        ParseInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
-            public void done(ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Installation initialization failed: " + e.getMessage());
-                }
-            }
-        });
-    }
-
-    @Kroll.method
-    public void enablePush() {
-        // Deprecated. Now happens automatically
-    }
-
-    @Kroll.method
-    public void authenticate(@Kroll.argument String sessionToken) {
-        ParseUser.becomeInBackground(sessionToken, new LogInCallback() {
-            public void done(ParseUser user, ParseException e) {
-                if (user != null) {
-                    // Hooray! The user is logged in.
-                } else {
-                    // Signup failed. Look at the ParseException to see what happened.
-                }
-            }
-        });
-    }
-
     @Kroll.method
     public void subscribeChannel(@Kroll.argument String channel) {
         ParsePush.subscribeInBackground(channel);
