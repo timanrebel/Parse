@@ -27,10 +27,10 @@ Put the following code in your app.js (or alloy.js if you are using Alloy) to ac
 
 ```javascript
 	var Parse = require('eu.rebelcorp.parse');
-	
+
 	// only authenticate if you have a session token from Parse already
 	Parse.authenticate('<your session token>');
-	
+
 	Parse.start();
 ```
 
@@ -39,7 +39,7 @@ To handle received notifications the moment it arrives at the Android phone
 ```javascript
 	Parse.addEventListener('notificationreceive', function(e) {
 		Ti.API.log("notification: ", JSON.stringify(e));
-	});	
+	});
 ```
 
 To handle a click on a notification
@@ -47,7 +47,7 @@ To handle a click on a notification
 ```javascript
 	Parse.addEventListener('notificationopen', function(e) {
 		Ti.API.log("notification: ", JSON.stringify(e));
-	});	
+	});
 ```
 
 These events are only fired when the app is running. When the app is not running and a notification is clicked, the app is started and the notification data is added to the launching intent. It can be accessed with the following code:
@@ -58,7 +58,7 @@ These events are only fired when the app is running. When the app is not running
 	if(data) {
 		try {
 			var json = JSON.parse(data);
-			
+
 			// Now handle the click on the notification
 		}
 			catch(e) {}
@@ -113,11 +113,36 @@ This will create your CloudCode application which resolves the duplicate Android
 
 Checkout the [Parse Manual](https://www.parse.com/docs/js/guide#cloud-code) for further information.
 
+## Notification image and color
+
+By default the app icon is used, however on Lollipop and above this icon is converted to a white mask. Often this isn't suitable.
+
+Parse allow you to customise this icon by adding a meta tag to the android manifest inside of your tiapp.xml file. More details can be found here: [https://parse.com/tutorials/android-push-notifications](https://parse.com/tutorials/android-push-notifications)
+
+The basic format is
+```
+<meta-data android:name="com.parse.push.notification_icon" android:resource="@drawable/push_icon"/>
+```
+
+Next add an image `push_icon.png` of 72x72px in white and transparent pixels, to your platform dir `platform/android/res/drawable/push_icon.png`.
+
+If you want to change the background color of the notification circle, override the value `parse_notification_color` in your `platform/android/res/values/colors.xml`.
+
 ## Known Issues
 
-* The current implementation does __NOT__ work in combination with the [Facebook module](https://github.com/appcelerator-modules/ti.facebook) provided by [Appcelerator](https://github.com/appcelerator). The Facebook module has a dependency onto the Boltz framework version 1.1.2, whereas Parse Android SDK 1.9.4 has a dependency onto version 1.2.0.
+* The current implementation only works in combination with [Facebook module](https://github.com/appcelerator-modules/ti.facebook) version 5.0.0 provided by [Appcelerator](https://github.com/appcelerator). That Facebook module also has a dependency onto the Boltz framework. Both modules should depend on the same version!
+* Somehow the Parse module enables the use of [OkHttp](http://square.github.io/okhttp/) internally when running on Android 4.4 and up. This is a side effect that only has benefits. Titanium internally still uses the Apache HTTP client, but the OkHttp client is more up-to-date and faster. Android 6.0 completely removes the [Apache HTTP client](http://developer.android.com/about/versions/marshmallow/android-6.0-changes.html#behavior-apache-http-client) support.
+ 
 
 ## Changelog
+**[v0.12.0](https://github.com/timanrebel/Parse/releases/tag/0.12.0)**
+- Resolve ti.facebook incompatibility [#19](https://github.com/timanrebel/Parse/issues/19)
+- Resolve SSL / SNI problems by adding OkHttp [#35](https://github.com/timanrebel/Parse/issues/35)
+
+**[v0.11.0](https://github.com/timanrebel/Parse/releases/tag/0.11.0)**
+- Add custom push icon & background color support
+- Add notification open tracking
+
 **[v0.10](https://github.com/timanrebel/Parse/releases/tag/0.10)**
 - Fix minor typo in cloud code
 - Trigger 'notificationreceive' when the app is in background but not killed.
@@ -153,9 +178,14 @@ Checkout the [Parse Manual](https://www.parse.com/docs/js/guide#cloud-code) for 
 
 ## Author
 
-**Timan Rebel**  
-twitter: @timanrebel  
+**Timan Rebel**
+twitter: @timanrebel
 
+## Contributors
+**[Jeroen van Dijk](https://github.com/jvandijk)**
+**[Fokke Zandbergen](https://github.com/FokkeZB)**
+**[Matthias Benkort](https://github.com/KtorZ)**
+**[Thibault Lenclos](https://github.com/tlenclos)**
 
 ## License
 

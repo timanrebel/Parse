@@ -15,6 +15,7 @@ import android.os.Bundle;
 
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.titanium.TiApplication;
+import org.appcelerator.titanium.util.TiRHelper;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -24,12 +25,17 @@ import android.util.Log;
 import eu.rebelcorp.parse.ParseModule;
 import com.parse.ParsePushBroadcastReceiver;
 
+import com.parse.ParseAnalytics;
+import android.R;
+import android.os.Build;
+import android.app.Notification;
 
 public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
 
     @Override
     public void onPushOpen(Context context, Intent intent) {
         Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getApplicationContext().getPackageName());
+        ParseAnalytics.trackAppOpenedInBackground(intent);
 
         /* Check if the app is running or in background. If not, just start the app and add the
          * notification as Extra */
@@ -39,7 +45,6 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
             context.startActivity(i);
             return;
         }
-
 
         /* Otherwise, just resume the app if necessary, and trigger the event */
         try {
@@ -91,5 +96,20 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
         } catch (Exception e) {
             Log.e("Push", "Exception: " + e.toString());
         }
+    }
+
+    @Override
+    protected Notification getNotification(Context context, Intent intent) {
+        Notification notification = super.getNotification(context, intent);
+
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                notification.color = context.getResources().getColor(TiRHelper.getResource("color.parse_notification_color"));
+            }
+        } catch (Exception e){
+            Log.e("Push", "Exception: " + e.toString());
+        }
+
+        return notification;
     }
 }
