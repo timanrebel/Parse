@@ -130,9 +130,15 @@ If you want to change the background color of the notification circle, override 
 
 ## Known Issues
 
-* The current implementation does __NOT__ work in combination with the [Facebook module](https://github.com/appcelerator-modules/ti.facebook) provided by [Appcelerator](https://github.com/appcelerator). The Facebook module has a dependency onto the Boltz framework version 1.1.2, whereas Parse Android SDK 1.9.4 has a dependency onto version 1.2.0.
+* The current implementation only works in combination with [Facebook module](https://github.com/appcelerator-modules/ti.facebook) version 5.0.0 provided by [Appcelerator](https://github.com/appcelerator). That Facebook module also has a dependency onto the Boltz framework. Both modules should depend on the same version!
+* Somehow the Parse module enables the use of [OkHttp](http://square.github.io/okhttp/) internally when running on Android 4.4 and up. This is a side effect that only has benefits. Titanium internally still uses the Apache HTTP client, but the OkHttp client is more up-to-date and faster. Android 6.0 completely removes the [Apache HTTP client](http://developer.android.com/about/versions/marshmallow/android-6.0-changes.html#behavior-apache-http-client) support.
+ 
 
 ## Changelog
+**[v0.12.0](https://github.com/timanrebel/Parse/releases/tag/0.12.0)**
+- Resolve ti.facebook incompatibility [#19](https://github.com/timanrebel/Parse/issues/19)
+- Resolve SSL / SNI problems by adding OkHttp [#35](https://github.com/timanrebel/Parse/issues/35)
+
 **[v0.11.0](https://github.com/timanrebel/Parse/releases/tag/0.11.0)**
 - Add custom push icon & background color support
 - Add notification open tracking
