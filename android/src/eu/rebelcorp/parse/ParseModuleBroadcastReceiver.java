@@ -83,8 +83,22 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
                 Log.d("onPushReceive", "App is in foreground; trigger event 'notificationreceive'");
 
                 try {
-                    KrollDict data = new KrollDict(new JSONObject(intent.getExtras().getString("com.parse.Data")));
+                    JSONObject pnData = new JSONObject(intent.getExtras().getString("com.parse.Data"));
+                    KrollDict data = new KrollDict(pnData);
                     ParseModule.getInstance().fireEvent("notificationreceive", data);
+                    
+                    // silent push
+                    if (pnData.has("content-available")) {
+                    	// iOS type = silent
+                    	return;
+                    } else if (pnData.has("title") || pnData.has("alert")) {
+                    	// normal push
+                    	super.onPushReceive(context, intent);
+                    	return;
+                    } else {
+                    	// no title && no alert = silent
+                    	return;
+                    }
                 } catch (Exception e) {
                     Log.d("onPushReceive", e.getMessage());
                 }
