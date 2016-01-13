@@ -66,47 +66,40 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
     @Override
     public void onPushReceive(Context context, Intent intent) {
         try {
-            if (intent == null) {
+        	if (intent == null) {
                 Log.d("onPushReceive", "Receiver intent null");
                 super.onPushReceive(context, intent);
                 return;
             }
+        	
+        	JSONObject pnData = new JSONObject(intent.getExtras().getString("com.parse.Data"));
+            KrollDict data = new KrollDict(pnData);
 
             if (ParseModule.getInstance() == null) {
                 Log.d("onPushReceive", "No instance of ParseModule found");
-                super.onPushReceive(context, intent);
+                // silent push
+                if (pnData.has("content-available") == false) {
+                	super.onPushReceive(context, intent);
+                }
                 return;
             }
-
-            /* The notification is received by the device */
+            
             if (ParseModule.getInstance().getState() != ParseModule.STATE_DESTROYED) {
                 Log.d("onPushReceive", "App is in foreground; trigger event 'notificationreceive'");
 
-                try {
-                    JSONObject pnData = new JSONObject(intent.getExtras().getString("com.parse.Data"));
-                    KrollDict data = new KrollDict(pnData);
-                    ParseModule.getInstance().fireEvent("notificationreceive", data);
-                    
-                    // silent push
-                    if (pnData.has("content-available")) {
-                    	// iOS type = silent
-                    	return;
-                    } else if (pnData.has("title") || pnData.has("alert")) {
-                    	// normal push
-                    	super.onPushReceive(context, intent);
-                    	return;
-                    } else {
-                    	// no title && no alert = silent
-                    	return;
-                    }
+                try {        
+                	ParseModule.getInstance().fireEvent("notificationreceive", data);
                 } catch (Exception e) {
                     Log.d("onPushReceive", e.getMessage());
                 }
             } else {
                 Log.d("onPushReceive", "App is not alive; 'notificationreceive' won't be triggered");
             }
-
-            super.onPushReceive(context, intent);
+            
+            // silent push
+            if (pnData.has("content-available") == false) {
+                super.onPushReceive(context, intent);
+            }
         } catch (Exception e) {
             Log.e("Push", "Exception: " + e.toString());
         }
