@@ -8,6 +8,8 @@
  */
 package eu.rebelcorp.parse;
 
+import java.util.HashMap;
+
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 
@@ -127,6 +129,13 @@ public class ParseModule extends KrollModule
             public void done(ParseException e) {
                 if (e != null) {
                     Log.e(TAG, "Installation initialization failed: " + e.getMessage());
+                }
+                else
+                {
+                    String deviceToken = (String)ParseInstallation.getCurrentInstallation().get("deviceToken");
+                    HashMap<String, Object> dict = new HashMap<String, Object>();
+                    dict.put("deviceToken",deviceToken);
+                    fireEvent("tokenReceived", dict);
                 }
             }
         });
