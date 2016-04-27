@@ -8,10 +8,13 @@
  */
 package eu.rebelcorp.parse;
 
+import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.kroll.common.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.NotificationManager;
 import android.content.Context;
@@ -135,7 +138,16 @@ public class ParseModule extends KrollModule
                 if (e != null) {
                     Log.e(TAG, "Installation initialization failed: " + e.getMessage());
                 }
-                module.fireEvent("installationId", getCurrentInstallationId());
+                // fire event
+                try {
+                	JSONObject pnData = new JSONObject();
+					pnData.put("objectId", getObjectId());
+					pnData.put("installationId", getCurrentInstallationId());
+					KrollDict data = new KrollDict(pnData);
+	                module.fireEvent("installationId", data);
+				} catch (JSONException e1) {
+					Log.e(TAG, "InstallationId event failed: " + e1.getMessage());
+				}
             }
         });
     }

@@ -50,6 +50,14 @@ To handle a click on a notification
 	});
 ```
 
+To handle saved installation
+
+```javascript
+	Parse.addEventListener('installationId', function(e) {
+		Ti.API.log("notification: ", JSON.stringify(e));
+	});
+```
+
 These events are only fired when the app is running. When the app is not running and a notification is clicked, the app is started and the notification data is added to the launching intent. It can be accessed with the following code:
 
 ```
@@ -131,10 +139,13 @@ If you want to change the background color of the notification circle, override 
 ## Known Issues
 
 * The current implementation only works in combination with [Facebook module](https://github.com/appcelerator-modules/ti.facebook) version 5.0.0 provided by [Appcelerator](https://github.com/appcelerator). That Facebook module also has a dependency onto the Boltz framework. Both modules should depend on the same version!
-* Somehow the Parse module enables the use of [OkHttp](http://square.github.io/okhttp/) internally when running on Android 4.4 and up. This is a side effect that only has benefits. Titanium internally still uses the Apache HTTP client, but the OkHttp client is more up-to-date and faster. Android 6.0 completely removes the [Apache HTTP client](http://developer.android.com/about/versions/marshmallow/android-6.0-changes.html#behavior-apache-http-client) support.
- 
 
 ## Changelog
+**[v0.13.1](https://github.com/timanrebel/Parse/releases/tag/0.12.0)**
+- Add silent push notification (when exist 'content-available' or omitted 'title'&'alert')
+- Add notification clear method : notificationClear()
+- Fire `installationId` event when new installation is saved.
+
 **[v0.12.0](https://github.com/timanrebel/Parse/releases/tag/0.12.0)**
 - Resolve ti.facebook incompatibility [#19](https://github.com/timanrebel/Parse/issues/19)
 - Resolve SSL / SNI problems by adding OkHttp [#35](https://github.com/timanrebel/Parse/issues/35)
