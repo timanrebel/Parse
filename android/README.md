@@ -142,7 +142,7 @@ If you want to change the background color of the notification circle, override 
 * The current implementation only works in combination with [Facebook module](https://github.com/appcelerator-modules/ti.facebook) version 5.0.0 provided by [Appcelerator](https://github.com/appcelerator). That Facebook module also has a dependency onto the Boltz framework. Both modules should depend on the same version!
 
 ## Changelog
-**[v0.13.1](https://github.com/timanrebel/Parse/releases/tag/0.12.0)**
+**[v0.13.1](https://github.com/timanrebel/Parse/releases/tag/0.13.1)**
 - Add silent push notification (when exist 'content-available' or omitted 'title'&'alert')
 - Add notification clear method : notificationClear()
 - Fire `installationId` event when new installation is saved.
