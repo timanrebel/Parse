@@ -19,6 +19,7 @@ we need to put the application id and client key from Parse in your `tiapp.xml` 
 ```xml
 	<property name="Parse_AppId" type="string">abcdefg</property>
 	<property name="Parse_ClientKey" type="string">hijklmnop</property>
+	<property name="Parse_ServerUrl" type="string">https://api.parse.com/1</property>
 ```
 
 **Please note:** You should not add any other Parse tags to your `manifest` section in your `tiapp.xml` file, this module does this all for you. If you do, it will result in displaying Push Notifications multiple times.
@@ -145,6 +146,7 @@ If you want to change the background color of the notification circle, override 
 - Add silent push notification (when exist 'content-available' or omitted 'title'&'alert')
 - Add notification clear method : notificationClear()
 - Fire `installationId` event when new installation is saved.
+- Support Parse server : Parse_ServerUrl
 
 **[v0.12.0](https://github.com/timanrebel/Parse/releases/tag/0.12.0)**
 - Resolve ti.facebook incompatibility [#19](https://github.com/timanrebel/Parse/issues/19)
