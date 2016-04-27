@@ -42,6 +42,7 @@ public class ParseModule extends KrollModule
     // tiapp.xml properties containing Parse's app id and client key
     public static String PROPERTY_APP_ID = "Parse_AppId";
     public static String PROPERTY_CLIENT_KEY = "Parse_ClientKey";
+    public static String PROPERTY_SERVER_URL = "Parse_ServerUrl";
 
     public static final int STATE_RUNNING = 1;
     public static final int STATE_STOPPED = 2;
@@ -64,9 +65,15 @@ public class ParseModule extends KrollModule
     {
         String appId = TiApplication.getInstance().getAppProperties().getString(ParseModule.PROPERTY_APP_ID, "");
         String clientKey = TiApplication.getInstance().getAppProperties().getString(ParseModule.PROPERTY_CLIENT_KEY, "");
+        String serverUrl = TiApplication.getInstance().getAppProperties().getString(ParseModule.PROPERTY_SERVER_URL, "");
 
-        Log.d(TAG, "Initializing with: " + appId + ", " + clientKey + ";");
-        Parse.initialize(TiApplication.getInstance(), appId, clientKey);
+        Log.d(TAG, "Initializing with: " + appId + ", " + clientKey + ", " + serverUrl);
+        Parse.initialize(new Parse.Configuration.Builder(TiApplication.getInstance())
+	        .applicationId(appId)
+	        .clientKey(clientKey)
+	        .server(serverUrl + "/") // The trailing slash is important.
+	        .build()
+	    );
     }
 
     /* Get control over the module's state */
