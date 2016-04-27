@@ -13,9 +13,8 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="android/lib/bolts-android-1.2.1.jar"/>
-	<classpathentry kind="lib" path="android/lib/Parse-1.10.3.jar"/>
-	<classpathentry kind="lib" path="android/lib/okio-1.6.0.jar"/>
-	<classpathentry kind="lib" path="android/lib/okhttp-2.5.0.jar"/>
+	<classpathentry kind="lib" path="android/lib/bolts-tasks-1.4.0.jar"/>
+	<classpathentry kind="lib" path="android/lib/Parse-1.13.0.jar"/>
+	<classpathentry kind="lib" path="android/lib/ParseInterceptors-0.0.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
