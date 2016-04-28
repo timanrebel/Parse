@@ -19,6 +19,7 @@ we need to put the application id and client key from Parse in your `tiapp.xml` 
 ```xml
 	<property name="Parse_AppId" type="string">abcdefg</property>
 	<property name="Parse_ClientKey" type="string">hijklmnop</property>
+	<property name="Parse_ServerUrl" type="string">https://api.parse.com/1</property>
 ```
 
 **Please note:** You should not add any other Parse tags to your `manifest` section in your `tiapp.xml` file, this module does this all for you. If you do, it will result in displaying Push Notifications multiple times.
@@ -46,6 +47,14 @@ To handle a click on a notification
 
 ```javascript
 	Parse.addEventListener('notificationopen', function(e) {
+		Ti.API.log("notification: ", JSON.stringify(e));
+	});
+```
+
+To handle saved installation
+
+```javascript
+	Parse.addEventListener('installationId', function(e) {
 		Ti.API.log("notification: ", JSON.stringify(e));
 	});
 ```
@@ -131,10 +140,14 @@ If you want to change the background color of the notification circle, override 
 ## Known Issues
 
 * The current implementation only works in combination with [Facebook module](https://github.com/appcelerator-modules/ti.facebook) version 5.0.0 provided by [Appcelerator](https://github.com/appcelerator). That Facebook module also has a dependency onto the Boltz framework. Both modules should depend on the same version!
-* Somehow the Parse module enables the use of [OkHttp](http://square.github.io/okhttp/) internally when running on Android 4.4 and up. This is a side effect that only has benefits. Titanium internally still uses the Apache HTTP client, but the OkHttp client is more up-to-date and faster. Android 6.0 completely removes the [Apache HTTP client](http://developer.android.com/about/versions/marshmallow/android-6.0-changes.html#behavior-apache-http-client) support.
- 
 
 ## Changelog
+**[v0.13.1](https://github.com/timanrebel/Parse/releases/tag/0.13.1)**
+- Add silent push notification (when exist 'content-available' or omitted 'title'&'alert')
+- Add notification clear method : notificationClear()
+- Fire `installationId` event when new installation is saved.
+- Support Parse server : Parse_ServerUrl
+
 **[v0.12.0](https://github.com/timanrebel/Parse/releases/tag/0.12.0)**
 - Resolve ti.facebook incompatibility [#19](https://github.com/timanrebel/Parse/issues/19)
 - Resolve SSL / SNI problems by adding OkHttp [#35](https://github.com/timanrebel/Parse/issues/35)

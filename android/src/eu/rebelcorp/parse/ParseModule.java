@@ -8,12 +8,15 @@
  */
 package eu.rebelcorp.parse;
 
+import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
-
 import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.kroll.common.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.app.Activity;
 import android.provider.Settings.Secure;
@@ -41,6 +44,7 @@ public class ParseModule extends KrollModule
     // tiapp.xml properties containing Parse's app id and client key
     public static String PROPERTY_APP_ID = "Parse_AppId";
     public static String PROPERTY_CLIENT_KEY = "Parse_ClientKey";
+    public static String PROPERTY_SERVER_URL = "Parse_ServerUrl";
 
     public static final int STATE_RUNNING = 1;
     public static final int STATE_STOPPED = 2;
@@ -63,9 +67,15 @@ public class ParseModule extends KrollModule
     {
         String appId = TiApplication.getInstance().getAppProperties().getString(ParseModule.PROPERTY_APP_ID, "");
         String clientKey = TiApplication.getInstance().getAppProperties().getString(ParseModule.PROPERTY_CLIENT_KEY, "");
+        String serverUrl = TiApplication.getInstance().getAppProperties().getString(ParseModule.PROPERTY_SERVER_URL, "");
 
-        Log.d(TAG, "Initializing with: " + appId + ", " + clientKey + ";");
-        Parse.initialize(TiApplication.getInstance(), appId, clientKey);
+        Log.d(TAG, "Initializing with: " + appId + ", " + clientKey + ", " + serverUrl);
+        Parse.initialize(new Parse.Configuration.Builder(TiApplication.getInstance())
+	        .applicationId(appId)
+	        .clientKey(clientKey)
+	        .server(serverUrl + "/") // The trailing slash is important.
+	        .build()
+	    );
     }
 
     /* Get control over the module's state */
@@ -121,13 +131,23 @@ public class ParseModule extends KrollModule
     {
         setState(STATE_RUNNING);
         // Track Push opens
-        ParseAnalytics.trackAppOpened(TiApplication.getAppRootOrCurrentActivity().getIntent());
+        ParseAnalytics.trackAppOpenedInBackground(TiApplication.getAppRootOrCurrentActivity().getIntent());
         ParseInstallation.getCurrentInstallation().put("androidId", getAndroidId());
         ParseInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
             public void done(ParseException e) {
                 if (e != null) {
                     Log.e(TAG, "Installation initialization failed: " + e.getMessage());
                 }
+                // fire event
+                try {
+                	JSONObject pnData = new JSONObject();
+					pnData.put("objectId", getObjectId());
+					pnData.put("installationId", getCurrentInstallationId());
+					KrollDict data = new KrollDict(pnData);
+	                module.fireEvent("installationId", data);
+				} catch (JSONException e1) {
+					Log.e(TAG, "InstallationId event failed: " + e1.getMessage());
+				}
             }
         });
     }
@@ -174,6 +194,13 @@ public class ParseModule extends KrollModule
     @Kroll.method
     public String getObjectId() {
         return ParseInstallation.getCurrentInstallation().getObjectId();
+    }
+    
+    @Kroll.method
+    public void notificationClear() {
+        TiApplication context = TiApplication.getInstance();
+        NotificationManager notifiyMgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notifiyMgr.cancelAll();
     }
 
     protected String getAndroidId() {
