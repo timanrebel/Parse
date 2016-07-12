@@ -17,9 +17,20 @@ Because the module needs to load and initialize during the startup of your Appli
 we need to put the application id and client key from Parse in your `tiapp.xml` file:
 
 ```xml
-	<property name="Parse_AppId" type="string">abcdefg</property>
-	<property name="Parse_ClientKey" type="string">hijklmnop</property>
-	<property name="Parse_ServerUrl" type="string">https://api.parse.com/1</property>
+	<android xmlns:android="http://schemas.android.com/apk/res/android">
+     <manifest ...>
+       ...
+       <application ...>
+         ...
+         <meta-data android:name="com.parse.push.gcm_sender_id" android:value="id:************"/>
+       </application>
+       ...
+     </manifest>
+	</android>
+	...
+	<property name="Parse_AppId" type="string">************</property>
+	<property name="Parse_ClientKey" type="string">************</property>
+	<property name="Parse_ServerUrl" type="string">https://************/parse</property>
 ```
 
 **Please note:** You should not add any other Parse tags to your `manifest` section in your `tiapp.xml` file, this module does this all for you. If you do, it will result in displaying Push Notifications multiple times.
