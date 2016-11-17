@@ -1,0 +1,3 @@
+"/Users/InGrowth/Documents/Projects/Ti-Parse/android/build/generated/java/eu/rebelcorp/parse/ParseBootstrap.java"
+"/Users/InGrowth/Documents/Projects/Ti-Parse/android/src/eu/rebelcorp/parse/ParseModule.java"
+"/Users/InGrowth/Documents/Projects/Ti-Parse/android/src/eu/rebelcorp/parse/ParseModuleBroadcastReceiver.java"

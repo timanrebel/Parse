@@ -2,8 +2,8 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 0.13.1
-apiversion: 2
+version: 0.14.1
+apiversion: 3
 description: Titanium module wrapping the Parse Android SDK.
 author: Timan Rebel
 license: MIT
@@ -11,9 +11,9 @@ copyright: Copyright (c) 2015 by Rebelcorp
 
 
 # these should not be edited
-name: Parse
+name: parse
 moduleid: eu.rebelcorp.parse
 guid: 39f0181f-c7e5-4665-a87f-4a06e4f41f9f
 platform: android
-architectures: armeabi armeabi-v7a x86
-minsdk: 4.1.0.GA
+architectures: armeabi-v7a x86
+minsdk: 6.0.0.GA
