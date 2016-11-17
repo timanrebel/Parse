@@ -11,7 +11,7 @@ copyright: Copyright (c) 2015 by Rebelcorp
 
 
 # these should not be edited
-name: Parse
+name: parse
 moduleid: eu.rebelcorp.parse
 guid: 39f0181f-c7e5-4665-a87f-4a06e4f41f9f
 platform: android
