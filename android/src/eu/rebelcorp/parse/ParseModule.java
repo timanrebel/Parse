@@ -130,7 +130,7 @@ public class ParseModule extends KrollModule
     public void start()
     {
         setState(STATE_RUNNING);
-        // Track Push opens
+        // App opens analytics
         ParseAnalytics.trackAppOpenedInBackground(TiApplication.getAppRootOrCurrentActivity().getIntent());
         ParseInstallation.getCurrentInstallation().put("androidId", getAndroidId());
         ParseInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
@@ -195,7 +195,7 @@ public class ParseModule extends KrollModule
     public String getObjectId() {
         return ParseInstallation.getCurrentInstallation().getObjectId();
     }
-    
+
     @Kroll.method
     public void notificationClear() {
         TiApplication context = TiApplication.getInstance();

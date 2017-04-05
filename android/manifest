@@ -2,7 +2,7 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 0.14.1
+version: 0.15.0
 apiversion: 3
 description: Titanium module wrapping the Parse Android SDK.
 author: Timan Rebel

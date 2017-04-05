@@ -35,6 +35,7 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
     @Override
     public void onPushOpen(Context context, Intent intent) {
         Intent i = context.getPackageManager().getLaunchIntentForPackage(context.getApplicationContext().getPackageName());
+        // Push open analytics
         ParseAnalytics.trackAppOpenedInBackground(intent);
 
         /* Check if the app is running or in background. If not, just start the app and add the
@@ -71,7 +72,7 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
                 super.onPushReceive(context, intent);
                 return;
             }
-        	
+
         	JSONObject pnData = new JSONObject(intent.getExtras().getString("com.parse.Data"));
             KrollDict data = new KrollDict(pnData);
 
@@ -83,11 +84,11 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
                 }
                 return;
             }
-            
+
             if (ParseModule.getInstance().getState() != ParseModule.STATE_DESTROYED) {
                 Log.d("onPushReceive", "App is in foreground; trigger event 'notificationreceive'");
 
-                try {        
+                try {
                 	ParseModule.getInstance().fireEvent("notificationreceive", data);
                 } catch (Exception e) {
                     Log.d("onPushReceive", e.getMessage());
@@ -95,7 +96,7 @@ public class ParseModuleBroadcastReceiver extends ParsePushBroadcastReceiver {
             } else {
                 Log.d("onPushReceive", "App is not alive; 'notificationreceive' won't be triggered");
             }
-            
+
             // silent push
             if (pnData.has("content-available") == false) {
                 super.onPushReceive(context, intent);

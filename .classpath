@@ -3,18 +3,19 @@
 	<classpathentry kind="src" path="android/src"/>
 	<classpathentry kind="src" path="android/build/.apt_generated"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/Users/InGrowth/Library/android-sdk-macosx/platforms/android-23/android.jar"/>
-	<classpathentry kind="lib" path="/Users/InGrowth/Library/android-sdk-macosx/add-ons/addon-google_apis-google-23/libs/maps.jar"/>
-	<classpathentry kind="lib" path="/Users/InGrowth/Library/Application Support/Titanium/mobilesdk/osx/6.0.0.GA/android/titanium.jar"/>
-	<classpathentry kind="lib" path="/Users/InGrowth/Library/Application Support/Titanium/mobilesdk/osx/6.0.0.GA/android/kroll-common.jar"/>
-	<classpathentry kind="lib" path="/Users/InGrowth/Library/Application Support/Titanium/mobilesdk/osx/6.0.0.GA/android/kroll-apt.jar"/>
+	<classpathentry kind="lib" path="/Users/ingrowth/Library/android-sdk-macosx/platforms/android-23/android.jar"/>
+	<classpathentry kind="lib" path="/Users/ingrowth/Library/android-sdk-macosx/add-ons/addon-google_apis-google-23/libs/maps.jar"/>
+	<classpathentry kind="lib" path="/Users/ingrowth/Library/Application Support/Titanium/mobilesdk/osx/6.0.0.GA/android/titanium.jar"/>
+	<classpathentry kind="lib" path="/Users/ingrowth/Library/Application Support/Titanium/mobilesdk/osx/6.0.0.GA/android/kroll-common.jar"/>
+	<classpathentry kind="lib" path="/Users/ingrowth/Library/Application Support/Titanium/mobilesdk/osx/6.0.0.GA/android/kroll-apt.jar"/>
 	<classpathentry kind="src" path=".apt_generated">
 		<attributes>
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="android/lib/bolts-tasks-1.4.0.jar"/>
-	<classpathentry kind="lib" path="android/lib/Parse-1.13.0.jar"/>
-	<classpathentry kind="lib" path="android/lib/ParseInterceptors-0.0.2.jar"/>
+	<classpathentry kind="lib" path="android/lib/okio-1.11.0.jar"/>
+	<classpathentry kind="lib" path="android/lib/okhttp-3.6.0.jar"/>
+	<classpathentry kind="lib" path="android/lib/parse-android-1.14.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
