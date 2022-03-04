@@ -1,0 +1,6 @@
+	repositories {
+		maven { url "https://jitpack.io" }
+	}
+dependencies {
+	implementation "com.github.parse-community.Parse-SDK-Android:parse:3.0.0"
+}
