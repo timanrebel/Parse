@@ -73,6 +73,12 @@ To handle saved installation
 	});
 ```
 
+
+Get the deviceToken with the FCM module and use this to send it to the parse server:
+```js
+Parse.registerPush(token)
+```
+
 These events are only fired when the app is running. When the app is not running and a notification is clicked, the app is started and the notification data is added to the launching intent. It can be accessed with the following code:
 
 ```

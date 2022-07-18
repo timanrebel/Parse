@@ -25,7 +25,6 @@ import com.parse.Parse;
 import com.parse.ParsePush;
 import com.parse.ParseAnalytics;
 import com.parse.ParseInstallation;
-//import com.parse.PushService;
 import com.parse.ParseUser;
 import com.parse.LogInCallback;
 import com.parse.SaveCallback;
@@ -155,6 +154,24 @@ public class ParseModule extends KrollModule
     @Kroll.method
     public void enablePush() {
         // Deprecated. Now happens automatically
+    }
+
+    @Kroll.method
+    public void registerToken(String token) {
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        if (installation != null && token != null) {
+            installation.setDeviceToken(token);
+            // even though this is FCM, calling it gcm will work on the backend
+            installation.setPushType("gcm");
+            installation.saveInBackground(
+                    e -> {
+                        if (e == null) {
+                            Log.i("Parse", "FCM token saved to installation");
+                        } else {
+                            Log.i("Parse", "FCM token error: " + e.getMessage());
+                        }
+                    });
+        }
     }
 
     @Kroll.method
