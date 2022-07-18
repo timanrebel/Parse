@@ -2,14 +2,17 @@
 
 ## Description
 
-Appcelerator Titanium module for the Parse SDK. This module currently only support Android Push Notifications
+Titanium module for the Parse SDK. This module currently only support Android Push Notifications
 
 ## Usage
 
-### Get it [![gitTio](http://gitt.io/badge.png)](http://gitt.io/component/eu.rebelcorp.parse)
-Download the latest [distribution ZIP-file](https://github.com/timanrebel/Parse/releases) and consult the [Titanium Documentation](http://docs.appcelerator.com/titanium/latest/#!/guide/Using_a_Module) on how install it, or simply use the [gitTio CLI](http://gitt.io/cli):
-
-`$ gittio install eu.rebelcorp.parse`
+Add
+```
+repositories {
+  maven { url "https://jitpack.io" }
+}
+```
+to `app/platform/android/build.gradle`
 
 ### Example
 
@@ -150,7 +153,7 @@ If you want to change the background color of the notification circle, override 
 
 ## Known Issues
 
-* The current implementation only works in combination with [Facebook module](https://github.com/appcelerator-modules/ti.facebook) version 5.0.0 provided by [Appcelerator](https://github.com/appcelerator). That Facebook module also has a dependency onto the Boltz framework. Both modules should depend on the same version!
+* The current implementation only works in combination with [Facebook module](https://github.com/tidev/ti.facebook) version 5.0.0 provided by [TiDev](https://github.com/tidev). That Facebook module also has a dependency onto the Boltz framework. Both modules should depend on the same version!
 
 ## Changelog
 **[v0.13.1](https://github.com/timanrebel/Parse/releases/tag/0.13.1)**
